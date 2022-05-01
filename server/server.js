@@ -22,6 +22,7 @@ app.use(express.json())
 app.post('/user', async(req, res)=> {
 
     let reqUser = req.body.username
+    let reqPassword = req.body.password
     console.log(reqUser)
 
 
@@ -30,15 +31,18 @@ app.post('/user', async(req, res)=> {
         res.status(400).send({ message:'already user'})
     } else {
         new User({
-            username: reqUser
+            username: reqUser,
+            password: reqPassword
         }).save()
 
-        res.send('worked')
+        res.redirect('/successful_signup')
     }
         
     
 })
-
+app.get('/successful_signup', (req, res) => {
+    res.send('Successfully signed up')
+})
 app.get('/user', async(req, res) => {
 
     const users = await User.find({}).distinct('username')

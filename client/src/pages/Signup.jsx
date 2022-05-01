@@ -8,6 +8,7 @@ class Signup extends React.Component {
 
         this.state = {
             username: '',
+            password:''
            
         }
     }
@@ -22,13 +23,14 @@ class Signup extends React.Component {
         axios.post('http://localhost:5000/user', this.state)
             .then(response => {
                 console.log(response)
+                window.open('http://localhost:5000/successful_signup', "_blank")
             })
             .catch(error => {
                 console.log(error)
             })
     }
     render(){
-        const { username } = this.state;
+        const { username, password } = this.state;
         let myArray = ['Users', 'Signup']
         return(
             <>
@@ -53,6 +55,9 @@ class Signup extends React.Component {
                 <form onSubmit={this.submitHandler}>
                     <div>
                         <input type="text" name="username" value={username} onChange={this.changeHandler}/>
+                    </div>
+                    <div>
+                        <input type="password" name="password" value={password} onChange={this.changeHandler}/>
                     </div>
                     <button type="submit">Submit</button>
                 </form>

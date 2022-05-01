@@ -4,7 +4,8 @@ const { mongooseConnectionString } = require('../config/appconfig.json')
 mongoose.connect(mongooseConnectionString).then(() => console.log(`Connected to db`))
 
 let Schema = new mongoose.Schema({
-    username: String
+    username: String,
+    password: String
 })
 
 module.exports = mongoose.model('User', Schema)
