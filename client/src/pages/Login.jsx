@@ -1,0 +1,77 @@
+import React from "react";
+import '../public/Home.css';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+ class Login extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            username: '',
+            password: ''
+
+        }
+    }
+    
+    changeHandler = e => {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+
+    submitHandler = e => {
+        e.preventDefault()
+        console.log(this.state)
+        axios.post('http://localhost:5000/login', this.state)
+            .then(response => {
+                console.log(response)
+                //window.open('http://localhost:5000/successful_signup', "_blank")
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+    
+    
+    render() {
+        
+        const { username, password } = this.state;
+        let myArray = ['Users', 'Signup', 'Login']
+        return (
+            <>
+                
+               
+                <div className="topnav">
+                    <a class="active" href="/">Home</a>
+                    {myArray.map(elm => (
+                        <a href={elm}>{elm}</a>
+                    ))}
+
+                </div>
+                <div class="area" >
+
+
+
+
+
+                    <h1 style={{ color: "white" }}>Login</h1>
+                    <div class="context"></div>
+
+                    <div>
+                        <form onSubmit={this.submitHandler}>
+                            <div>
+                                <input type="text" name="username" value={username} onChange={this.changeHandler} />
+                            </div>
+                            <div>
+                                <input type="password" name="password" value={password} onChange={this.changeHandler} />
+                            </div>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div >
+            </>
+        )
+    }
+}
+
+export default Login;

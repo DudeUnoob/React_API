@@ -3,14 +3,24 @@ const app = express();
 const { sentences } = require("../randomSentences")
 const User = require("../server/models/user");
 const cors = require("cors")
+const session = require("express-session");
+const bodyParser = require('body-parser')
 const corsOptions ={
     origin:'*', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200,
  }
- 
+ app.use(bodyParser.json())
+ app.use(bodyParser.urlencoded({ extended: false }))
  app.use(cors()); // Use this after the variable declaration
- 
+ app.use(session({
+     secret:'lifeless-gaming-123',
+     saveUninitialized: true,
+     cookie: {
+         secure: true,
+         maxAge: 3600000
+     }
+ }))
 
 app.get('/api', (req, res) => {
     maxSentences = sentences.length;
@@ -39,6 +49,26 @@ app.post('/user', async(req, res)=> {
     }
         
     
+})
+app.post('/login', async(req, res) => {
+    let user;
+    user = await User.findOne({ username: req.body.username, password: req.body.password })
+    if(user === null){
+        return res.status(400).json({ message: 'No user found with these credentials' })
+    } else {
+        
+        session.userid = user.username
+        console.log(session.userid)
+        return res.send('Logged in')
+    }
+})
+
+app.get('/login', async(req, res) => {
+    if(session.userid){
+        res.send({ loggedIn: true, user: session.userid })
+    } else {
+        res.send({ loggedIn: false })
+    }
 })
 app.get('/successful_signup', (req, res) => {
     res.send('Successfully signed up')

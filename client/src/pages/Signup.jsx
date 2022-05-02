@@ -31,7 +31,7 @@ class Signup extends React.Component {
     }
     render(){
         const { username, password } = this.state;
-        let myArray = ['Users', 'Signup']
+        let myArray = ['Users', 'Signup', 'Login']
         return(
             <>
             
@@ -54,10 +54,10 @@ class Signup extends React.Component {
             <div>
                 <form onSubmit={this.submitHandler}>
                     <div>
-                        <input type="text" name="username" value={username} onChange={this.changeHandler}/>
+                        <input type="text" name="username" value={username} onChange={this.changeHandler} required/>
                     </div>
                     <div>
-                        <input type="password" name="password" value={password} onChange={this.changeHandler}/>
+                        <input type="password" name="password" value={password} onChange={this.changeHandler} required/>
                     </div>
                     <button type="submit">Submit</button>
                 </form>
