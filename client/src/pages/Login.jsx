@@ -54,7 +54,7 @@ useEffect(() => {
       return nothing
     }
   }
-  let myArray = ['Users', 'Signup', 'Login']
+  let myArray = ['Users', 'Signup', 'Login', "Profile"]
     
   return (
     <>

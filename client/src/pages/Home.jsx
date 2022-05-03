@@ -7,7 +7,7 @@ function Home() {
 
 
 
-    let myArray = ['Users', 'Signup', 'Login']
+    let myArray = ['Users', 'Signup', 'Login', "Profile"]
     const [backendData, setBackendData] = useState({});
     useEffect(() => {
         fetch('/api').then(res => res.json()).then(data => setBackendData(data))
