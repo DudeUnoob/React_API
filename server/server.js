@@ -3,7 +3,7 @@ const app = express();
 const { sentences } = require("../randomSentences")
 const User = require("../server/models/user");
 const cors = require("cors")
-const session = require("express-session");
+const sessions = require("express-session");
 const bodyParser = require('body-parser')
 const corsOptions ={
     origin:'*', 
@@ -19,14 +19,23 @@ const corsOptions ={
       credentials: true,
     })
   );
- app.use(session({
-     secret:'lifeless-gaming-123',
-     saveUninitialized: true,
-     cookie: {
-         secure: true,
-         maxAge: 3600000
-     }
- }))
+  app.use(express.urlencoded({ extended: true, limit:'512kb' }));
+  app.use(sessions({
+    name:'API Roast',
+    secret:'theapibestroast2022',
+    resave: true,
+    saveUninitialized: true
+    }));
+  let session;
+  app.use(bodyParser.json())
+  const oneDay = 1000 * 60 * 60 * 24;
+  app.use(express.static('public'))
+  app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false
+  }));
 
 app.get('/api', (req, res) => {
     maxSentences = sentences.length;
@@ -62,7 +71,7 @@ app.post('/login', async(req, res) => {
     if(user === null){
         return res.status(400).json({ message: 'No user found with these credentials' })
     } else {
-        
+        session = req.session;
         session.userid = user.username
         console.log(session.userid)
         return res.send({ loggedIn: true, user: session.userid })
@@ -70,6 +79,7 @@ app.post('/login', async(req, res) => {
 })
 
 app.get('/login', async(req, res) => {
+    session = req.session;
     if(session.userid){
         res.send({ loggedIn: true, user: session.userid })
     } else {
@@ -86,13 +96,15 @@ app.get('/user', async(req, res) => {
 })
 
 app.get('/logout', async(req, res) => {
-    console.log(session.userid + ' before destruction')
+    session = req.session;
     req.session.destroy();
+    console.log(session.userid + ' before destruction')
+    
     console.log(`Destroyed session at ${Date(Date.now())}`)
-    res.redirect('/');
+    res.redirect('/home');
 })
 
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
     res.send('Welcome to the home page')
 })
 app.listen(5000, () => {

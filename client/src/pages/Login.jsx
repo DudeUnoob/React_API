@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import "../App.css";
+import "../public/Home.css";
 
 export default function Registration() {
   
@@ -53,10 +54,17 @@ useEffect(() => {
       return nothing
     }
   }
-  
+  let myArray = ['Users', 'Signup', 'Login']
+    
   return (
     <>
-    
+    <div className="topnav">
+                <a className="active" href="/">Home</a>
+                {myArray.map((elm, i) => (
+                    <a href={elm} key={i}>{elm}</a>
+                ))}
+
+            </div>
     <div className="App">
       
 

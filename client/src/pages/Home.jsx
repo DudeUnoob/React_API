@@ -15,22 +15,22 @@ function Home() {
     return (
         <>
         <div className="topnav">
-                <a class="active" href="/">Home</a>
-                {myArray.map(elm => (
-                    <a href={elm}>{elm}</a>
+                <a className="active" href="/">Home</a>
+                {myArray.map((elm, i) => (
+                    <a href={elm} key={i}>{elm}</a>
                 ))}
 
             </div>
             
             
-            <div class="context">
+            <div className="context">
             <h1 style={{ marginLeft: 15 }}>Welcome to the Home Page!</h1>
             <p> {backendData.message}</p>
             <p ><i>Refresh for a random message</i></p>
             </div>
 
 
-            <div class="area" >
+            <div className="area" >
 
             </div >
             
