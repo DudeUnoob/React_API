@@ -85,7 +85,16 @@ app.get('/user', async(req, res) => {
     res.json(users)
 })
 
+app.get('/logout', async(req, res) => {
+    console.log(session.userid + ' before destruction')
+    req.session.destroy();
+    console.log(`Destroyed session at ${Date(Date.now())}`)
+    res.redirect('/');
+})
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the home page')
+})
 app.listen(5000, () => {
     console.log('Listening')
 })

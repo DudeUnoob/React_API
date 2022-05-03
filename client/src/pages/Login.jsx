@@ -21,6 +21,7 @@ export default function Registration() {
     }).then((response) => {
       if (response.data.loggedIn === true) {
         setLoginStatus(response.data.user);
+        
       } else {
         setLoginStatus("false");
       }
@@ -36,8 +37,26 @@ useEffect(() => {
       }
     });
   }, []);
-
+  
+  function checkLogin () {
+    Axios.get("http://localhost:5000/login").then((response) => {
+      if(response == null){
+        
+      }
+    })
+    if(loginStatus){
+      let logout = <a href="http://localhost:5000/logout">Logout</a>
+       return logout
+    }
+    if(!loginStatus){
+      let nothing = <div></div>
+      return nothing
+    }
+  }
+  
   return (
+    <>
+    
     <div className="App">
       
 
@@ -60,9 +79,10 @@ useEffect(() => {
         <button onClick={login}> Login </button>
         
       </div>
-
-      <h1>{loginStatus}</h1>
+      <h1>{checkLogin()}</h1>
+      
       
     </div>
+    </>
   );
 }
