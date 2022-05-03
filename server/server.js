@@ -12,7 +12,13 @@ const corsOptions ={
  }
  app.use(bodyParser.json())
  app.use(bodyParser.urlencoded({ extended: false }))
- app.use(cors()); // Use this after the variable declaration
+ app.use(
+    cors({
+      origin: ["http://localhost:3000"],
+      methods: ["GET", "POST"],
+      credentials: true,
+    })
+  );
  app.use(session({
      secret:'lifeless-gaming-123',
      saveUninitialized: true,
@@ -59,7 +65,7 @@ app.post('/login', async(req, res) => {
         
         session.userid = user.username
         console.log(session.userid)
-        return res.send('Logged in')
+        return res.send({ loggedIn: true, user: session.userid })
     }
 })
 

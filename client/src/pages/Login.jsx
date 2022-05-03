@@ -1,77 +1,68 @@
-import React from "react";
-import '../public/Home.css';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
+import "../App.css";
 
- class Login extends React.Component {
+export default function Registration() {
+  
 
-    constructor(props) {
-        super(props)
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-        this.state = {
-            username: '',
-            password: ''
+  const [loginStatus, setLoginStatus] = useState("");
 
-        }
-    }
-    
-    changeHandler = e => {
-        this.setState({ [e.target.name]: e.target.value })
-    }
+  Axios.defaults.withCredentials = true;
 
-    submitHandler = e => {
-        e.preventDefault()
-        console.log(this.state)
-        axios.post('http://localhost:5000/login', this.state)
-            .then(response => {
-                console.log(response)
-                //window.open('http://localhost:5000/successful_signup', "_blank")
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-    
-    
-    render() {
+  
+
+  const login = () => {
+    Axios.post("http://localhost:5000/login", {
+      username: username,
+      password: password,
+    }).then((response) => {
+      if (response.data.loggedIn === true) {
+        setLoginStatus(response.data.user);
+      } else {
+        setLoginStatus("false");
+      }
+    });
+  };
+
+ 
+
+useEffect(() => {
+    Axios.get("http://localhost:5000/login").then((response) => {
+      if (response.data.loggedIn == true) {
+        setLoginStatus(response.data.user)
+      }
+    });
+  }, []);
+
+  return (
+    <div className="App">
+      
+
+      <div className="login">
+        <h1>Login</h1>
+        <input
+          type="text"
+          placeholder="Username..."
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+        />
+        <input
+          type="password"
+          placeholder="Password..."
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <button onClick={login}> Login </button>
         
-        const { username, password } = this.state;
-        let myArray = ['Users', 'Signup', 'Login']
-        return (
-            <>
-                
-               
-                <div className="topnav">
-                    <a class="active" href="/">Home</a>
-                    {myArray.map(elm => (
-                        <a href={elm}>{elm}</a>
-                    ))}
+      </div>
 
-                </div>
-                <div class="area" >
-
-
-
-
-
-                    <h1 style={{ color: "white" }}>Login</h1>
-                    <div class="context"></div>
-
-                    <div>
-                        <form onSubmit={this.submitHandler}>
-                            <div>
-                                <input type="text" name="username" value={username} onChange={this.changeHandler} />
-                            </div>
-                            <div>
-                                <input type="password" name="password" value={password} onChange={this.changeHandler} />
-                            </div>
-                            <button type="submit">Submit</button>
-                        </form>
-                    </div>
-                </div >
-            </>
-        )
-    }
+      <h1>{loginStatus}</h1>
+      
+    </div>
+  );
 }
-
-export default Login;
