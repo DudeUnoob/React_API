@@ -5,6 +5,7 @@ const User = require("../server/models/user");
 const cors = require("cors")
 const sessions = require("express-session");
 const bodyParser = require('body-parser')
+const fileUpload = require('express-fileupload');
 const corsOptions ={
     origin:'*', 
     credentials:true,            //access-control-allow-credentials:true
@@ -28,6 +29,7 @@ const corsOptions ={
     }));
   let session;
   app.use(bodyParser.json())
+  app.use(fileUpload());
   const oneDay = 1000 * 60 * 60 * 24;
   app.use(express.static('public'))
   app.use(sessions({
@@ -104,6 +106,9 @@ app.get('/logout', async(req, res) => {
     res.redirect('/home');
 })
 
+app.post('/profilepicture', async(req, res) => {
+    
+})
 app.get('/home', (req, res) => {
     res.send('Welcome to the home page')
 })
