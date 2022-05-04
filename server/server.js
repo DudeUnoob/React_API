@@ -11,6 +11,8 @@ const corsOptions ={
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200,
  }
+ app.use(express.urlencoded({ extended: true, limit:'512kb' }));
+ app.use(express.json({limit: '15mb'}));
  app.use(bodyParser.json())
  app.use(bodyParser.urlencoded({ extended: false }))
  app.use(
@@ -107,7 +109,10 @@ app.get('/logout', async(req, res) => {
 })
 
 app.post('/profilepicture', async(req, res) => {
-    
+    // console.log(req.body.user)
+    // res.send({message: req.body.image})
+    await User.findOneAndUpdate({ username: req.body.user }, { profilepicture: req.body.image })
+    res.send({ message: 'Updated profile picture!' })
 })
 app.get('/home', (req, res) => {
     res.send('Welcome to the home page')

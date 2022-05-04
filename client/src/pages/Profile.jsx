@@ -1,11 +1,14 @@
 import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import ReactDOM from 'react-dom';
 
 
 
 function Profile() {
     const [loginStatus, setLoginStatus] = useState("");
+    const [baseImage, setBaseImage] = useState("");
+    const [profilePictureStatus, setUpdatedProfilePicture] = useState("");
     
     Axios.defaults.withCredentials = true;
     useEffect(() => {
@@ -15,8 +18,50 @@ function Profile() {
             }
         });
     }, []);
-
     
+    const uploadImage = async (e) => {
+        const file = e.target.files[0];
+        const base64 = await convertBase64(file);
+        setBaseImage(base64);
+      };
+    
+      const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+    
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+    
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        });
+      };
+
+      const submitPfp = () => {
+          Axios.post('http://localhost:5000/profilepicture', {
+              image: baseImage,
+              user: loginStatus
+          }).then((response) => {
+              if(response.data.message == "Updated profile picture!"){
+                  setUpdatedProfilePicture("completed")
+              }})
+      }
+
+      function updatedProfilePicture(){
+          console.log(profilePictureStatus)
+          if(profilePictureStatus){
+              document.getElementById("img").style.visibility='hidden';
+               
+              return (
+                  <p>Updated Profile picture</p>
+              )
+          }
+          
+
+      }
     // let state = {
     //     selectedFile: null  
     // }
@@ -32,6 +77,9 @@ function Profile() {
     //     fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
     //     Axios.post('http://localhost:5000/profilepicture')
     // }
+   
+  
+       
     function checkLogin() {
         Axios.get("http://localhost:5000/login").then((response) => {
             if (response == null) {
@@ -40,11 +88,25 @@ function Profile() {
         })
         if (loginStatus) {
                 
-           return (
-               <div>
-                   <h1>Hello {loginStatus}!</h1>
-               </div>
-           )
+            return (
+                <div className="App">
+                    
+                    <input
+                    type="file"
+                    onChange={(e) => {
+                      uploadImage(e);
+                    }}
+                    accept="image/*"
+                  />
+                  <br></br>
+                  <img id="img" src={baseImage} height="100px" />
+                  
+                  <button type="submit" onClick={submitPfp}>Submit</button>
+                  
+                  <div>{updatedProfilePicture()}</div>
+                </div>
+                
+              );
 
             
         }
