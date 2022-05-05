@@ -40,13 +40,13 @@ useEffect(() => {
   }, []);
   
   function checkLogin () {
-    Axios.get("https://reactroastapi.up.railway.app//login").then((response) => {
+    Axios.get("https://reactroastapi.up.railway.app/login").then((response) => {
       if(response == null){
         
       }
     })
     if(loginStatus){
-      let logout = <a href="https://reactroastapi.up.railway.app//logout">Logout</a>
+      let logout = <a href="https://reactroastapi.up.railway.app/logout">Logout</a>
        return logout
     }
     if(!loginStatus){
