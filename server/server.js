@@ -154,6 +154,6 @@ app.get('/calli/:room', (req, res) => {
     })
   })
   
-app.listen(5000, () => {
+app.listen(5000 || process.env.PORT , () => {
     console.log('Listening')
 })
