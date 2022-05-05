@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { sentences } = require("./randomSentences")
-const User = require("../server/models/user");
+const User = require("./user");
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const { ExpressPeerServer } = require('peer');
