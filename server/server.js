@@ -4,10 +4,16 @@ const { sentences } = require("./randomSentences")
 const User = require("./user");
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
+const port = process.env.PORT || 5000;
+require('dotenv').config();
 const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server, {
   debug: true
 });
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+  }
+  
 const { v4: uuidV4 } = require('uuid')
 app.use('/peerjs', peerServer);
 const cors = require("cors")
@@ -154,6 +160,6 @@ app.get('/calli/:room', (req, res) => {
     })
   })
   
-app.listen(process.env.PORT || 5000  , () => {
-    console.log('Listening')
-})
+  app.listen(port, function () {
+    console.log(`Server listening on port 3000, http://localhost:5000 ${process.env.PORT}`);
+  });
