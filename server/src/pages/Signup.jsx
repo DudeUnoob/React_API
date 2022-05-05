@@ -19,7 +19,7 @@ class Signup extends React.Component {
     submitHandler = e => {
         e.preventDefault()
         console.log(this.state)
-        axios.post('http://localhost:5000/user', this.state)
+        axios.post('https://reactroastapi.up.railway.app/user', this.state)
             .then(response => {
                 console.log(response)
             })

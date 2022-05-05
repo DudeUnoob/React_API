@@ -20,10 +20,10 @@ class Signup extends React.Component {
     submitHandler = e => {
         e.preventDefault()
         console.log(this.state)
-        axios.post('http://localhost:5000/user', this.state)
+        axios.post('https://reactroastapi.up.railway.app/user', this.state)
             .then(response => {
                 console.log(response)
-                window.open('http://localhost:5000/successful_signup', "_blank")
+                window.open('https://reactroastapi.up.railway.app/successful_signup', "_blank")
             })
             .catch(error => {
                 console.log(error)

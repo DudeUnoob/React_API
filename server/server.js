@@ -2,6 +2,14 @@ const express = require('express');
 const app = express();
 const { sentences } = require("../randomSentences")
 const User = require("../server/models/user");
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+const { ExpressPeerServer } = require('peer');
+const peerServer = ExpressPeerServer(server, {
+  debug: true
+});
+const { v4: uuidV4 } = require('uuid')
+app.use('/peerjs', peerServer);
 const cors = require("cors")
 const sessions = require("express-session");
 const bodyParser = require('body-parser')
@@ -17,7 +25,7 @@ const corsOptions ={
  app.use(bodyParser.urlencoded({ extended: false }))
  app.use(
     cors({
-      origin: ["http://localhost:3000"],
+      origin: ["https://reactroastapi.up.railway.app"],
       methods: ["GET", "POST"],
       credentials: true,
     })
@@ -124,6 +132,28 @@ app.post('/getprofilepicture', async(req, res) => {
 app.get('/home', (req, res) => {
     res.send('Welcome to the home page')
 })
+app.get('/call', (req, res)=> {
+    res.redirect(`/call/${uuidV4()}`)
+})
+app.get('/calli/:room', (req, res) => {
+    res.render('room', { roomId: req.params.room })
+  })
+  io.on('connection', socket => {
+    socket.on('join-room', (roomId, userId) => {
+      socket.join(roomId)
+      socket.to(roomId).broadcast.emit('user-connected', userId);
+      // messages
+      socket.on('message', (message) => {
+        //send message to the same room
+        io.to(roomId).emit('createMessage', message)
+    }); 
+  
+      socket.on('disconnect', () => {
+        socket.to(roomId).broadcast.emit('user-disconnected', userId)
+      })
+    })
+  })
+  
 app.listen(5000, () => {
     console.log('Listening')
 })

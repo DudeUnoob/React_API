@@ -14,14 +14,14 @@ function Profile() {
     
     Axios.defaults.withCredentials = true;
     useEffect(() => {
-        Axios.get("http://localhost:5000/login").then((response) => {
+        Axios.get("https://reactroastapi.up.railway.app/login").then((response) => {
             if (response.data.loggedIn == true) {
                 setLoginStatus(response.data.user)
             }
         });
     }, []);
     useEffect(() => {
-        Axios.post('http://localhost:5000/getprofilepicture', {
+        Axios.post('https://reactroastapi.up.railway.app/getprofilepicture', {
               username: loginStatus
           }).then((response) => {
             setProfilePicture(response.data.profilepicture)
@@ -59,7 +59,7 @@ function Profile() {
     //   }
       let finalImage = profilePicture   
       const submitPfp = () => {
-          Axios.post('http://localhost:5000/profilepicture', {
+          Axios.post('https://reactroastapi.up.railway.app/profilepicture', {
               image: baseImage,
               user: loginStatus
           }).then((response) => {
@@ -99,7 +99,7 @@ function Profile() {
   
        
     function checkLogin() {
-        Axios.get("http://localhost:5000/login").then((response) => {
+        Axios.get("https://reactroastapi.up.railway.app/login").then((response) => {
             if (response == null) {
 
             }

@@ -16,7 +16,7 @@ export default function Registration() {
   
 
   const login = () => {
-    Axios.post("http://localhost:5000/login", {
+    Axios.post("https://reactroastapi.up.railway.app/login", {
       username: username,
       password: password,
     }).then((response) => {
@@ -32,7 +32,7 @@ export default function Registration() {
  
 
 useEffect(() => {
-    Axios.get("http://localhost:5000/login").then((response) => {
+    Axios.get("https://reactroastapi.up.railway.app/login").then((response) => {
       if (response.data.loggedIn == true) {
         setLoginStatus(response.data.user)
       }
@@ -40,13 +40,13 @@ useEffect(() => {
   }, []);
   
   function checkLogin () {
-    Axios.get("http://localhost:5000/login").then((response) => {
+    Axios.get("https://reactroastapi.up.railway.app//login").then((response) => {
       if(response == null){
         
       }
     })
     if(loginStatus){
-      let logout = <a href="http://localhost:5000/logout">Logout</a>
+      let logout = <a href="https://reactroastapi.up.railway.app//logout">Logout</a>
        return logout
     }
     if(!loginStatus){
