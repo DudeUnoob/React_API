@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import ReactDOM from 'react-dom';
+import '../public/Home.css';
 
 
 
@@ -9,6 +10,7 @@ function Profile() {
     const [loginStatus, setLoginStatus] = useState("");
     const [baseImage, setBaseImage] = useState("");
     const [profilePictureStatus, setUpdatedProfilePicture] = useState("");
+    const [profilePicture, setProfilePicture] = useState("");
     
     Axios.defaults.withCredentials = true;
     useEffect(() => {
@@ -18,7 +20,14 @@ function Profile() {
             }
         });
     }, []);
-    
+    useEffect(() => {
+        Axios.post('http://localhost:5000/getprofilepicture', {
+              username: loginStatus
+          }).then((response) => {
+            setProfilePicture(response.data.profilepicture)
+          })
+          //console.log(profilePicture)
+    })
     const uploadImage = async (e) => {
         const file = e.target.files[0];
         const base64 = await convertBase64(file);
@@ -39,7 +48,16 @@ function Profile() {
           };
         });
       };
+    //   const getProfilePicture = () => {
+    //       Axios.post('http://localhost:5000/getprofilepicture', {
+    //           username: loginStatus
+    //       }).then((response) => {
+    //           setProfilePicture(response.data.profilepicture)
+    //           console.log(response.data.profilepicture)
 
+    //       })
+    //   }
+      let finalImage = profilePicture   
       const submitPfp = () => {
           Axios.post('http://localhost:5000/profilepicture', {
               image: baseImage,
@@ -104,6 +122,9 @@ function Profile() {
                   <button type="submit" onClick={submitPfp}>Submit</button>
                   
                   <div>{updatedProfilePicture()}</div>
+                   {/* <button onClick={getProfilePicture}>Ok</button> */}
+                   <img id="pfp" src={profilePicture}></img>
+                  
                 </div>
                 
               );

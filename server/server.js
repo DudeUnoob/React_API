@@ -114,6 +114,13 @@ app.post('/profilepicture', async(req, res) => {
     await User.findOneAndUpdate({ username: req.body.user }, { profilepicture: req.body.image })
     res.send({ message: 'Updated profile picture!' })
 })
+
+app.post('/getprofilepicture', async(req, res) => {
+
+    
+    await User.find({ username: req.body.username }).select('profilepicture').then((response) => res.send( response[0] ))
+    
+})
 app.get('/home', (req, res) => {
     res.send('Welcome to the home page')
 })
