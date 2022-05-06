@@ -21,10 +21,17 @@ function Profile() {
             }
         });
     }, []);
+    const config = {
+        headers:{
+          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+          'Access-Control-Allow-Origin':'*'
+          
+        }
+      }
     useEffect(() => {
         Axios.post(`${testClient}/getprofilepicture`, {
               username: loginStatus
-          }).then((response) => {
+          }, config).then((response) => {
             setProfilePicture(response.data.profilepicture)
           })
           //console.log(profilePicture)
@@ -63,7 +70,7 @@ function Profile() {
           Axios.post(`${testClient}/profilepicture`, {
               image: baseImage,
               user: loginStatus
-          }).then((response) => {
+          }, config).then((response) => {
               if(response.data.message == "Updated profile picture!"){
                   setUpdatedProfilePicture("completed")
               }})

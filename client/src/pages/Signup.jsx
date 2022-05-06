@@ -2,6 +2,13 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../public/Home.css';
+const config = {
+    headers:{
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+      'Access-Control-Allow-Origin':'*'
+      
+    }
+  }
 let testClient = `https://reactroastapi.up.railway.app`
 class Signup extends React.Component {
     constructor(props){
@@ -21,7 +28,7 @@ class Signup extends React.Component {
     submitHandler = e => {
         e.preventDefault()
         console.log(this.state)
-        axios.post(`${testClient}/user`, this.state)
+        axios.post(`${testClient}/user`, this.state, config)
             .then(response => {
                 console.log(response)
                 window.open(`${testClient}/successful_signup`, "_blank")

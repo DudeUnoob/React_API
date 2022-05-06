@@ -15,12 +15,19 @@ export default function Registration() {
   Axios.defaults.withCredentials = true;
 
   
-
+  const config = {
+    headers:{
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+      'Access-Control-Allow-Origin':'*'
+      
+    }
+  }
   const login = () => {
     Axios.post(`${testClient}/login`, {
       username: username,
       password: password,
-    }).then((response) => {
+    }, config
+    ).then((response) => {
       if (response.data.loggedIn === true) {
         setLoginStatus(response.data.user);
         
