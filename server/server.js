@@ -16,7 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const { v4: uuidV4 } = require('uuid')
 app.use('/peerjs', peerServer);
-const cors = require("cors")
+
 const sessions = require("express-session");
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload');
@@ -26,13 +26,9 @@ app.use(express.json({ limit: '15mb' }));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-const corsOptions = {
-  origin: 'https://reactroast.up.railway.app/',
-  credentials: true,            //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-  
-}
-app.use(cors());
+var cors = require('cors');    
+app.use(cors({credentials: true, origin: 'http://localhost:5000'}));
+
 app.use(express.urlencoded({ extended: true, limit: '512kb' }));
 app.use(sessions({
   name: 'API Roast',
