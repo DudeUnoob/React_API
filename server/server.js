@@ -25,7 +25,7 @@ const fileUpload = require('express-fileupload');
  app.use(express.json({limit: '15mb'}));
  app.use(bodyParser.json())
  app.use(bodyParser.urlencoded({ extended: false }))
- const cors = require('cors');
+ 
 const corsOptions ={
     origin:'https://reactroastapi.up.railway.app/', 
     credentials:true,            //access-control-allow-credentials:true
