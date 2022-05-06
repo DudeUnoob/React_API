@@ -5,7 +5,7 @@ import "../public/Home.css";
 
 export default function Registration() {
   
-  let testClient = `https://reactroastapi.up.railway.app/login`
+  let testClient = `https://reactroastapi.up.railway.app`
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
