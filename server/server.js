@@ -27,9 +27,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 const corsOptions = {
-  origin: 'https://reactroastapi.up.railway.app/',
-  credentials: true,            //access-control-allow-credentials:true
-  optionSuccessStatus: 200
+  origin: 'https://reactroast.up.railway.app/',
+  credentials: false,            //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+  withCredentials: false
 }
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true, limit: '512kb' }));
