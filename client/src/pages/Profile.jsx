@@ -23,7 +23,7 @@ function Profile() {
     }, []);
     const config = {
         headers:{
-          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+          
           'Access-Control-Allow-Origin':'*'
           
         }
