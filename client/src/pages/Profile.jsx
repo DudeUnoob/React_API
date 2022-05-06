@@ -70,7 +70,7 @@ function Profile() {
           Axios.post(`${testClient}/profilepicture`, {
               image: baseImage,
               user: loginStatus
-          }, config).then((response) => {
+          }).then((response) => {
               if(response.data.message == "Updated profile picture!"){
                   setUpdatedProfilePicture("completed")
               }})
