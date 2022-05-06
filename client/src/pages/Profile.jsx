@@ -7,6 +7,7 @@ import '../public/Home.css';
 
 
 function Profile() {
+    let testClient = `http://localhost:3000`
     const [loginStatus, setLoginStatus] = useState("");
     const [baseImage, setBaseImage] = useState("");
     const [profilePictureStatus, setUpdatedProfilePicture] = useState("");
@@ -14,14 +15,14 @@ function Profile() {
     
     Axios.defaults.withCredentials = true;
     useEffect(() => {
-        Axios.get("https://reactroastapi.up.railway.app/login").then((response) => {
+        Axios.get(`${testClient}/login`).then((response) => {
             if (response.data.loggedIn == true) {
                 setLoginStatus(response.data.user)
             }
         });
     }, []);
     useEffect(() => {
-        Axios.post('https://reactroastapi.up.railway.app/getprofilepicture', {
+        Axios.post(`${testClient}/getprofilepicture`, {
               username: loginStatus
           }).then((response) => {
             setProfilePicture(response.data.profilepicture)
@@ -59,7 +60,7 @@ function Profile() {
     //   }
       let finalImage = profilePicture   
       const submitPfp = () => {
-          Axios.post('https://reactroastapi.up.railway.app/profilepicture', {
+          Axios.post(`${testClient}/profilepicture`, {
               image: baseImage,
               user: loginStatus
           }).then((response) => {
@@ -99,7 +100,7 @@ function Profile() {
   
        
     function checkLogin() {
-        Axios.get("https://reactroastapi.up.railway.app/login").then((response) => {
+        Axios.get(`${testClient}/login`).then((response) => {
             if (response == null) {
 
             }

@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../public/Home.css';
+let testClient = `http://localhost:3000`
 class Signup extends React.Component {
     constructor(props){
         super(props)
@@ -16,14 +17,14 @@ class Signup extends React.Component {
     changeHandler = e => {
         this.setState({[e.target.name]: e.target.value})
     }
-
+    
     submitHandler = e => {
         e.preventDefault()
         console.log(this.state)
-        axios.post('https://reactroastapi.up.railway.app/user', this.state)
+        axios.post(`${testClient}/user`, this.state)
             .then(response => {
                 console.log(response)
-                window.open('https://reactroastapi.up.railway.app/successful_signup', "_blank")
+                window.open(`${testClient}/successful_signup`, "_blank")
             })
             .catch(error => {
                 console.log(error)

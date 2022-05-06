@@ -5,6 +5,7 @@ import "../public/Home.css";
 
 export default function Registration() {
   
+  let testClient = `http://localhost:3000`
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +17,7 @@ export default function Registration() {
   
 
   const login = () => {
-    Axios.post("https://reactroastapi.up.railway.app/login", {
+    Axios.post(`${testClient}/login`, {
       username: username,
       password: password,
     }).then((response) => {
@@ -32,7 +33,7 @@ export default function Registration() {
  
 
 useEffect(() => {
-    Axios.get("https://reactroastapi.up.railway.app/login").then((response) => {
+    Axios.get(`${testClient}/login`).then((response) => {
       if (response.data.loggedIn == true) {
         setLoginStatus(response.data.user)
       }
@@ -40,13 +41,13 @@ useEffect(() => {
   }, []);
   
   function checkLogin () {
-    Axios.get("https://reactroastapi.up.railway.app/login").then((response) => {
+    Axios.get(`${testClient}/login`).then((response) => {
       if(response == null){
         
       }
     })
     if(loginStatus){
-      let logout = <a href="https://reactroastapi.up.railway.app/logout">Logout</a>
+      let logout = <a href={`${testClient}/logout`}>Logout</a>
        return logout
     }
     if(!loginStatus){
