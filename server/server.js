@@ -27,7 +27,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 var cors = require('cors');    
-app.use(cors({credentials: true, origin: 'http://localhost:5000'}));
+app.use(cors({credentials: true, origin: 'https://reactroastapi.up.railway.app/'}));
 
 app.use(express.urlencoded({ extended: true, limit: '512kb' }));
 app.use(sessions({
