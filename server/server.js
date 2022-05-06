@@ -28,11 +28,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 const corsOptions = {
   origin: 'https://reactroast.up.railway.app/',
-  credentials: false,            //access-control-allow-credentials:true
+  credentials: true,            //access-control-allow-credentials:true
   optionSuccessStatus: 200,
-  withCredentials: false
+  
 }
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.urlencoded({ extended: true, limit: '512kb' }));
 app.use(sessions({
   name: 'API Roast',
