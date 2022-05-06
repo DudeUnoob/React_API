@@ -7,7 +7,7 @@ import '../public/Home.css';
 
 
 function Profile() {
-    let testClient = `https://reactroastapi.up.railway.app/login`
+    let testClient = `https://reactroastapi.up.railway.app`
     const [loginStatus, setLoginStatus] = useState("");
     const [baseImage, setBaseImage] = useState("");
     const [profilePictureStatus, setUpdatedProfilePicture] = useState("");
