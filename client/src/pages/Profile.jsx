@@ -21,17 +21,17 @@ function Profile() {
             }
         });
     }, []);
-    const config = {
-        headers:{
+    // const config = {
+    //     headers:{
           
-          'Access-Control-Allow-Origin':'*'
+    //       'Access-Control-Allow-Origin':'*'
           
-        }
-      }
+    //     }
+    //   }
     useEffect(() => {
         Axios.post(`${testClient}/getprofilepicture`, {
               username: loginStatus
-          }, config).then((response) => {
+          }).then((response) => {
             setProfilePicture(response.data.profilepicture)
           })
           //console.log(profilePicture)
