@@ -20,22 +20,18 @@ const cors = require("cors")
 const sessions = require("express-session");
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload');
-const corsOptions ={
-    origin:'*', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200,
- }
+
  app.use(express.urlencoded({ extended: true, limit:'512kb' }));
  app.use(express.json({limit: '15mb'}));
  app.use(bodyParser.json())
  app.use(bodyParser.urlencoded({ extended: false }))
- app.use(
-    cors({
-      origin: ["https://reactroastapi.up.railway.app"],
-      methods: ["GET", "POST"],
-      credentials: true,
-    })
-  );
+ const cors = require('cors');
+const corsOptions ={
+    origin:'https://reactroastapi.up.railway.app/', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
   app.use(express.urlencoded({ extended: true, limit:'512kb' }));
   app.use(sessions({
     name:'API Roast',
