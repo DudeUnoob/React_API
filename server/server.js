@@ -51,7 +51,7 @@ app.use(sessions({
 app.get('/api', (req, res) => {
   maxSentences = sentences.length;
   let index = Math.floor(Math.random() * (maxSentences - 1));
-  res.header('Access-Control-Allow-Origin', ['*']);
+  
   res.json({ message: sentences[index] });
 
 })
@@ -65,14 +65,14 @@ app.post('/user', async (req, res) => {
 
   let test = await User.findOne({ username: reqUser })
   if (test) {
-    res.header('Access-Control-Allow-Origin', ['*']);
+    
     res.status(400).send({ message: 'already user' })
   } else {
     new User({
       username: reqUser,
       password: reqPassword
     }).save()
-    res.header('Access-Control-Allow-Origin', ['*']);
+    
 
     res.redirect('/successful_signup')
   }
@@ -83,13 +83,13 @@ app.post('/login', async (req, res) => {
   let user;
   user = await User.findOne({ username: req.body.username, password: req.body.password })
   if (user === null) {
-    res.header('Access-Control-Allow-Origin', ['*']);
+    
     return res.status(400).json({ message: 'No user found with these credentials' })
   } else {
     session = req.session;
     session.userid = user.username
     console.log(session.userid)
-    res.header('Access-Control-Allow-Origin', ['*']);
+    
     return res.send({ loggedIn: true, user: session.userid })
   }
 })
@@ -97,21 +97,21 @@ app.post('/login', async (req, res) => {
 app.get('/login', async (req, res) => {
   session = req.session;
   if (session.userid) {
-    res.header('Access-Control-Allow-Origin', ['*']);
+    
     res.send({ loggedIn: true, user: session.userid })
   } else {
-    res.header('Access-Control-Allow-Origin', ['*']);
+    
     res.send({ loggedIn: false })
   }
 })
 app.get('/successful_signup', (req, res) => {
-  res.header('Access-Control-Allow-Origin', ['*']);
+  
   res.send('Successfully signed up')
 })
 app.get('/user', async (req, res) => {
 
   const users = await User.find({}).distinct('username')
-  res.header('Access-Control-Allow-Origin', ['*']);
+  
   res.json(users)
 })
 
@@ -121,7 +121,7 @@ app.get('/logout', async (req, res) => {
   console.log(session.userid + ' before destruction')
 
   console.log(`Destroyed session at ${Date(Date.now())}`)
-  res.header('Access-Control-Allow-Origin', ['*']);
+  
   res.redirect('/home');
 })
 
@@ -129,26 +129,26 @@ app.post('/profilepicture', async (req, res) => {
   // console.log(req.body.user)
   // res.send({message: req.body.image})
   await User.findOneAndUpdate({ username: req.body.user }, { profilepicture: req.body.image })
-  res.header('Access-Control-Allow-Origin', ['*']);
+  
   res.send({ message: 'Updated profile picture!' })
 })
 
 app.post('/getprofilepicture', async (req, res) => {
 
-  res.header('Access-Control-Allow-Origin', ['*']);
+  
   await User.find({ username: req.body.username }).select('profilepicture').then((response) => res.send(response[0]))
 
 })
 app.get('/home', (req, res) => {
-  res.header('Access-Control-Allow-Origin', ['*']);
+  
   res.send('Welcome to the home page')
 })
 app.get('/call', (req, res) => {
-  res.header('Access-Control-Allow-Origin', ['*']);
+  
   res.redirect(`/call/${uuidV4()}`)
 })
 app.get('/calli/:room', (req, res) => {
-  res.header('Access-Control-Allow-Origin', ['*']);
+  
   res.render('room', { roomId: req.params.room })
 })
 io.on('connection', socket => {
