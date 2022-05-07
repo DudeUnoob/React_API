@@ -2,13 +2,13 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../public/Home.css';
-// const config = {
-//     headers:{
+const config = {
+    headers:{
       
-//       'Access-Control-Allow-Origin':'*'
+      'Access-Control-Allow-Origin':'*'
       
-//     }
-//   }
+    }
+  }
 let testClient = `https://reactroastapi.up.railway.app`
 class Signup extends React.Component {
     constructor(props){

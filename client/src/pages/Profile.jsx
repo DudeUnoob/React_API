@@ -21,13 +21,13 @@ function Profile() {
             }
         });
     }, []);
-    // const config = {
-    //     headers:{
+    const config = {
+        headers:{
           
-    //       'Access-Control-Allow-Origin':'*'
+          'Access-Control-Allow-Origin':'${testClient}'
           
-    //     }
-    //   }
+        }
+      }
     useEffect(() => {
         Axios.post(`${testClient}/getprofilepicture`, {
               username: loginStatus
@@ -57,7 +57,7 @@ function Profile() {
         });
       };
     //   const getProfilePicture = () => {
-    //       Axios.post('http://localhost:5000/getprofilepicture', {
+    //       Axios.post('${testClient}/getprofilepicture', {
     //           username: loginStatus
     //       }).then((response) => {
     //           setProfilePicture(response.data.profilepicture)
@@ -101,7 +101,7 @@ function Profile() {
     // function fileUploadHandler(){
     //     const fd = new FormData();
     //     fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
-    //     Axios.post('http://localhost:5000/profilepicture')
+    //     Axios.post('${testClient}/profilepicture')
     // }
    
   

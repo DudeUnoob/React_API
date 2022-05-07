@@ -25,9 +25,9 @@ app.use(express.urlencoded({ extended: true, limit: '512kb' }));
 app.use(express.json({ limit: '15mb' }));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-
+let website = 'https://reactroast.up.railway.app/'
 var cors = require('cors');    
-app.use(cors({credentials: true, origin: 'https://reactroast.up.railway.app/'}));
+app.use(cors({credentials: true, origin: true}));
 
 app.use(express.urlencoded({ extended: true, limit: '512kb' }));
 app.use(sessions({

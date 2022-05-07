@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "https://104.196.232.237",
+  "proxy": "https://reactroastapi.up.railway.app/",
   "homepage": ".",
   "private": true,
   "dependencies": {
