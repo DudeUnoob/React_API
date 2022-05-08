@@ -143,30 +143,11 @@ app.get('/home', (req, res) => {
   
   res.send('Welcome to the home page')
 })
-app.get('/call', (req, res) => {
-  
-  res.redirect(`/call/${uuidV4()}`)
-})
-app.get('/calli/:room', (req, res) => {
-  
-  res.render('room', { roomId: req.params.room })
-})
-io.on('connection', socket => {
-  socket.on('join-room', (roomId, userId) => {
-    socket.join(roomId)
-    socket.to(roomId).broadcast.emit('user-connected', userId);
-    // messages
-    socket.on('message', (message) => {
-      //send message to the same room
-      io.to(roomId).emit('createMessage', message)
-    });
 
-    socket.on('disconnect', () => {
-      socket.to(roomId).broadcast.emit('user-disconnected', userId)
-    })
-  })
-})
+app.get('/covid', (req, res) => {
 
+  fetch('https://api.covidtracking.com/v2/states.json').then(response => response.json()).then(data => res.send(data['data']))
+})
 app.listen(port, function () {
   console.log(`Server listening on port 3000, http://localhost:5000 ${process.env.PORT}`);
 });

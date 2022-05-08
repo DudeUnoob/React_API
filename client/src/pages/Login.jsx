@@ -5,7 +5,12 @@ import "../public/Home.css";
 
 export default function Registration() {
   
-  let testClient = `https://reactroastapi.up.railway.app`
+  let testClient = false
+    if (testClient == false) {
+        testClient = `https://reactroastapi.up.railway.app`
+    } else {
+        testClient = `http://localhost:5000`
+    }
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -55,6 +60,8 @@ useEffect(() => {
     })
     if(loginStatus){
       let logout = <a href={`${testClient}/logout`}>Logout</a>
+      document.getElementById('loginCheck').style.visibility = 'hidden'
+
        return logout
     }
     if(!loginStatus){
@@ -76,7 +83,7 @@ useEffect(() => {
     <div className="App">
       
 
-      <div className="login">
+      <div className="login" id="loginCheck">
         <h1>Login</h1>
         <input
           type="text"

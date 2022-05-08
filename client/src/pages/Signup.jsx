@@ -9,7 +9,12 @@ const config = {
       
     }
   }
-let testClient = `https://reactroastapi.up.railway.app`
+  let testClient = false
+  if (testClient == false) {
+      testClient = `https://reactroastapi.up.railway.app`
+  } else {
+      testClient = `http://localhost:5000`
+  }
 class Signup extends React.Component {
     constructor(props){
         super(props)
