@@ -121,22 +121,24 @@ function Profile() {
                 
             return (
                 <div className="App">
-                    
+                    <h1>Choose a Profile Picture</h1>
                     <input
                     type="file"
                     onChange={(e) => {
                       uploadImage(e);
                     }}
+                    
                     accept="image/*"
                   />
                   <br></br>
-                  <img id="img" src={baseImage} height="100px" />
+                  <img id="img" src={baseImage} height="50px" width={"50px"} />
                   
-                  <button type="submit" onClick={submitPfp}>Submit</button>
+                  <button type="submit" id="testingbutton" onClick={submitPfp}>Submit</button>
                   
                   <div>{updatedProfilePicture()}</div>
                    {/* <button onClick={getProfilePicture}>Ok</button> */}
-                   <img id="pfp" src={profilePicture}></img>
+                   
+                   <img id="pfp" src={profilePicture} onClick={() => window.open('/',"_self")}></img>
                   
                 </div>
                 

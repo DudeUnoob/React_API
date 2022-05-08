@@ -188,6 +188,14 @@ img#pfp {
     border-radius: 50%;
     height: 50px;
     width: 50px;
-    margin: 0px;
-    padding: 0px;
+    position: absolute;
+    left: 20px;
+    top:60px;
+}
+img#img{
+    margin-top: 15px;
+}
+
+button#testingbutton{
+    margin-left: 15px;
 }
