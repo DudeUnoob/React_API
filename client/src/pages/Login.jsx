@@ -5,7 +5,7 @@ import "../public/Home.css";
 
 export default function Registration() {
   
-  let testClient = true
+  let testClient = false
     if (testClient == false) {
         testClient = `https://reactroastapi.up.railway.app`
     } else {
