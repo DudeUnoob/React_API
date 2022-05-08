@@ -9,7 +9,7 @@ const config = {
       
     }
   }
-  let testClient = false
+  let testClient = true
   if (testClient == false) {
       testClient = `https://reactroastapi.up.railway.app`
   } else {
