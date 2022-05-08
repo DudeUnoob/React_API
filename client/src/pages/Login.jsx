@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import "../App.css";
 import "../public/Home.css";
+import { testClient } from "./testClient";
+
 
 export default function Registration() {
   
-  let testClient = false
-    if (testClient == false) {
+  
+    if (testClient === false) {
         testClient = `https://reactroastapi.up.railway.app`
     } else {
         testClient = `http://localhost:5000`
@@ -38,6 +40,7 @@ export default function Registration() {
         
       } else {
         setLoginStatus("false");
+        
       }
     });
   };
@@ -46,7 +49,7 @@ export default function Registration() {
 
 useEffect(() => {
     Axios.get(`${testClient}/login`).then((response) => {
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         setLoginStatus(response.data.user)
       }
     });
@@ -54,7 +57,7 @@ useEffect(() => {
   
   function checkLogin () {
     Axios.get(`${testClient}/login`).then((response) => {
-      if(response == null){
+      if(response === null){
         
       }
     })

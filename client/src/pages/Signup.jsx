@@ -2,6 +2,9 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../public/Home.css';
+import { testClient } from "./testClient";
+
+
 const config = {
     headers:{
       
@@ -9,8 +12,8 @@ const config = {
       
     }
   }
-  let testClient = false
-  if (testClient == false) {
+  
+  if (testClient === false) {
       testClient = `https://reactroastapi.up.railway.app`
   } else {
       testClient = `http://localhost:5000`

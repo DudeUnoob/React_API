@@ -2,13 +2,14 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import '../public/Home.css';
 import Axios from 'axios';
+import { testClient } from "./testClient";
 
 
 function Home() {
     Axios.defaults.withCredentials = true;
     const [loginStatus, setLoginStatus] = useState("");
-    let testClient = false
-    if (testClient == false) {
+    
+    if (testClient === false) {
         testClient = `https://reactroastapi.up.railway.app`
     } else {
         testClient = `http://localhost:5000`
@@ -21,7 +22,7 @@ function Home() {
     // }, [])
     useEffect(() => {
         Axios.get(`${testClient}/login`).then((response) => {
-            if (response.data.loggedIn == true) {
+            if (response.data.loggedIn === true) {
                 setLoginStatus(response.data.user)
             }
         });

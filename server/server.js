@@ -122,7 +122,7 @@ app.get('/logout', async (req, res) => {
 
   console.log(`Destroyed session at ${Date(Date.now())}`)
   
-  res.redirect('/home');
+  res.redirect('/');
 })
 
 app.post('/profilepicture', async (req, res) => {
@@ -139,7 +139,7 @@ app.post('/getprofilepicture', async (req, res) => {
   await User.find({ username: req.body.username }).select('profilepicture').then((response) => res.send(response[0]))
 
 })
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
   
   res.send('Welcome to the home page')
 })

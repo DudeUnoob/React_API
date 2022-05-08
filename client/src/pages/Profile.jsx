@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import ReactDOM from 'react-dom';
 import '../public/Home.css';
+import { testClient } from "./testClient";
 
 
 
 function Profile() {
-  let testClient = false
-  if (testClient == false) {
+  
+  if (testClient === false) {
       testClient = `https://reactroastapi.up.railway.app`
   } else {
       testClient = `http://localhost:5000`
@@ -21,7 +22,7 @@ function Profile() {
     Axios.defaults.withCredentials = true;
     useEffect(() => {
         Axios.get(`${testClient}/login`).then((response) => {
-            if (response.data.loggedIn == true) {
+            if (response.data.loggedIn === true) {
                 setLoginStatus(response.data.user)
             }
         });
@@ -76,7 +77,7 @@ function Profile() {
               image: baseImage,
               user: loginStatus
           }).then((response) => {
-              if(response.data.message == "Updated profile picture!"){
+              if(response.data.message === "Updated profile picture!"){
                   setUpdatedProfilePicture("completed")
               }})
       }
