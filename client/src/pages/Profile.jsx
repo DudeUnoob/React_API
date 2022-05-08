@@ -10,10 +10,12 @@ import { testClient } from "./testClient";
 function Profile() {
   
   if (testClient === false) {
-      testClient = `https://reactroastapi.up.railway.app`
-  } else {
-      testClient = `http://localhost:5000`
-  }
+    testClient = `https://reactroastapi.up.railway.app`
+} 
+
+if(testClient === true){
+    testClient = `http://localhost:5000`
+}
     const [loginStatus, setLoginStatus] = useState("");
     const [baseImage, setBaseImage] = useState("");
     const [profilePictureStatus, setUpdatedProfilePicture] = useState("");

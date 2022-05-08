@@ -11,7 +11,9 @@ function Home() {
     
     if (testClient === false) {
         testClient = `https://reactroastapi.up.railway.app`
-    } else {
+    } 
+    
+    if(testClient === true){
         testClient = `http://localhost:5000`
     }
 
