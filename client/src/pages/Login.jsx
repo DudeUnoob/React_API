@@ -20,6 +20,7 @@ export default function Registration() {
   const [password, setPassword] = useState("");
 
   const [loginStatus, setLoginStatus] = useState("");
+  //const [failChecking, setFailCheck] = useState("");
 
   Axios.defaults.withCredentials = true;
 
@@ -44,9 +45,17 @@ export default function Registration() {
         setLoginStatus("false");
         
       }
+      
     });
   };
 
+  // useEffect(() => {
+  //   Axios.post(`${testClient}/login`).then((response) => {
+  //     if(response.data.message === "No user found with these credentials"){
+  //       setFailCheck("No user found with these credentials")
+  //     }
+  //   });
+  // }, [])
  
 
 useEffect(() => {
@@ -74,6 +83,17 @@ useEffect(() => {
       return nothing
     }
   }
+
+  // function test () {
+  //   if(failChecking){
+  //     let final = <p>No user found with these credentials</p>
+
+  //     return final
+  //   }
+
+  // }
+
+  
   let myArray = ['Users', 'Signup', 'Login', "Profile"]
     
   return (

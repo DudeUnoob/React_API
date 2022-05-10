@@ -126,7 +126,7 @@ if(testClient === true){
                 <div className="App">
                     <h1>Choose a Profile Picture</h1>
                     <input
-                    type="file"
+                    type="file" id="fileButton"
                     onChange={(e) => {
                       uploadImage(e);
                     }}

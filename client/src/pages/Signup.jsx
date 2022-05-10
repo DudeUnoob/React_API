@@ -47,6 +47,15 @@ class Signup extends React.Component {
                 console.log(error)
             })
     }
+    validatePassword () {
+        let officialPassword = document.getElementById('password');
+        let confirm_password = document.getElementById('confirm_password');
+        if (officialPassword.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+          } else {
+            confirm_password.setCustomValidity('');
+          }
+        }
     render(){
         const { username, password } = this.state;
         let myArray = ['Users', 'Signup', 'Login', "Profile"]
@@ -72,12 +81,15 @@ class Signup extends React.Component {
             <div>
                 <form onSubmit={this.submitHandler}>
                     <div>
-                        <input type="text" name="username" value={username} onChange={this.changeHandler} required/>
+                        <input type="text" name="username" id="username" value={username} onChange={this.changeHandler} placeholder="Username" required/>
                     </div>
                     <div>
-                        <input type="password" name="password" value={password} onChange={this.changeHandler} required/>
+                        <input type="password" name="password"  id="password" value={password} onChange={this.changeHandler} placeholder="Password" required/>
                     </div>
-                    <button type="submit">Submit</button>
+                    <div>
+                        <input type={"password"} name="confirm_password" id="confirm_password" placeholder="Confirm Password" required/>
+                    </div>
+                    <button type="submit" onClick={this.validatePassword}>Submit</button>
                 </form>
             </div>
             </div >
