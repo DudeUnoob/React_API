@@ -141,7 +141,9 @@ if(testClient === true){
                   <div>{updatedProfilePicture()}</div>
                    {/* <button onClick={getProfilePicture}>Ok</button> */}
                    
-                   <img id="pfp" src={profilePicture} onClick={() => window.open('/',"_self")}></img>
+                   {/* <img id="pfp" src={profilePicture} onClick={() => window.open('/',"_self")}></img> */}
+                   {/* <button onClick={() => window.open('/',"_self")} type="button"><img id="pfp" src={profilePicture} ></img></button> */}
+                   <input id="pfp" type="image"  onClick={() => window.open('/',"_self")} src={profilePicture} /> 
                   
                 </div>
                 

@@ -146,7 +146,18 @@ app.get('/', (req, res) => {
 
 app.get('/covid', (req, res) => {
 
-  fetch('https://api.covidtracking.com/v2/states.json').then(response => response.json()).then(data => res.send(data['data']))
+  fetch('https://api.covidtracking.com/v2/states.json').then(response => response.json()).then(data => res.send(
+    
+  {
+    name: data['data'][0].name ,
+    state_code: data['data'][0].state_code,
+    population: data['data'][0].census['population'],
+    url:  data['data'][0].sites[0].url
+  }
+  
+    
+    
+    ))
 })
 app.listen(port, function () {
   console.log(`Server listening on port 3000, http://localhost:5000 ${process.env.PORT}`);
