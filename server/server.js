@@ -152,11 +152,9 @@ app.get('/covid', (req, res) => {
     name: data['data'][0].name ,
     state_code: data['data'][0].state_code,
     population: data['data'][0].census['population'],
-    url:  data['data'][0].sites[0].url
-  }
-  
+    url:  data['data'][0].sites[0].url,
     
-    
+  },
     ))
 })
 app.listen(port, function () {

@@ -24,11 +24,11 @@ function Covid () {
     }, []);
     let backendDataArray = ['State: '+ backendData.name, 'State Code: ' + backendData.state_code, 'Population: ' + backendData.population]
 
-    
     let pushArray = backendDataArray.map((elm, i) => <li  key={i} style={li1}>{elm}</li>)
     return (
         <div>
-            <h1>Alaska Covid Information</h1>
+            <h1 >Alaska Covid Information</h1>
+
             <ul>
                 
                 {pushArray}
