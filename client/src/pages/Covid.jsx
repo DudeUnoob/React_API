@@ -2,6 +2,7 @@ import React from "react";
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import '../public/Home.css';
+import { testClient } from './testClient';
 
 function Covid () {
 
@@ -12,7 +13,7 @@ function Covid () {
     const [backendData, setBackendData] = useState("");
         
     useEffect(() => {
-        Axios.get('http://localhost:5000/covid').then((response) => setBackendData(
+        Axios.get(`${testClient}/covid`).then((response) => setBackendData(
             
         {
             name: response.data.name,

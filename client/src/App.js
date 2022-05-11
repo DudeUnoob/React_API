@@ -9,6 +9,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Covid from './pages/Covid';
+import Google from './pages/Google';
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
 
       </Route>
       <Route path='/covid' element={<Covid />}>
+
+      </Route>
+      <Route path='/google' element={<Google />}>
 
       </Route>
       

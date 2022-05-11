@@ -1,4 +1,4 @@
-let testClient = false
+let testClient = true
 
 
 exports.testClient = testClient;
