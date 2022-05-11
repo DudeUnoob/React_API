@@ -157,6 +157,6 @@ app.get('/covid', (req, res) => {
   },
     ))
 })
-app.listen(port, function () {
+app.listen(process.env.PORT, function () {
   console.log(`Server listening on port 3000, http://localhost:5000 ${process.env.PORT}`);
 });
