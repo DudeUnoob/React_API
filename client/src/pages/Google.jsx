@@ -36,12 +36,12 @@ function Google() {
     return (
         
             <div>
-                <button onClick={handleGoogleSignIn}>Google Sign in</button> <br />
+                <button onClick={handleGoogleSignIn} style={{ marginLeft: "15px"}}>Google Sign in</button> <br />
                 {
                     user.email && (<div>
-                        <h2>Welcome {user.displayName}</h2>
-                        <img src={user.photoURL}></img>
-                        <img src={user.photoURL} alt=""/>
+                        <h2 style={{ marginLeft: "15px"}}>Welcome {user.displayName}</h2>
+                        
+                        <img src={user.photoURL} style={{borderRadius: "50%", marginLeft: "15px"}} alt=""/>
                     </div>)
                 }
                
