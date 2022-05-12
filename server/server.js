@@ -157,7 +157,7 @@ app.get('/covid', (req, res) => {
   },
     ))
 })
-<<<<<<< HEAD
+
 let final;
 app.post('/getgoogle', async(req, res) => {
   
@@ -216,9 +216,9 @@ app.get('/googlepost', (req, res) => {
   }
   
 })
-app.listen(port, function () {
-=======
-app.listen(process.env.PORT, function () {
->>>>>>> f588f386d3fbb6a00d8234182eec2aeb6e37ad80
+
+
+app.listen(process.env.PORT || 5000, function () {
+
   console.log(`Server listening on port 3000, http://localhost:5000 ${process.env.PORT}`);
 });
