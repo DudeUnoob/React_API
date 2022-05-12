@@ -5,11 +5,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from './pages/Home';
 import Users from './pages/Users';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
+import Signup from './pages/testSignup';
+import Login from './pages/testLogin';
 import Profile from './pages/Profile';
 import Covid from './pages/Covid';
 import Google from './pages/Google';
+import GoogleProfile from './pages/GoogleProfile';
 
 function App() {
   return (
@@ -35,6 +36,12 @@ function App() {
 
       </Route>
       <Route path='/google' element={<Google />}>
+
+      </Route>
+      <Route path='/googleprofile' element={<GoogleProfile />}>
+
+      </Route>
+      <Route path='/signup' element={<Google />}>
 
       </Route>
       

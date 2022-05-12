@@ -41,12 +41,12 @@ app.use(bodyParser.json())
 app.use(fileUpload());
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(express.static('public'))
-app.use(sessions({
-  secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-  saveUninitialized: true,
-  cookie: { maxAge: oneDay },
-  resave: false
-}));
+// app.use(sessions({
+//   secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+//   saveUninitialized: true,
+//   cookie: { maxAge: oneDay },
+//   resave: false
+// }));
 
 app.get('/api', (req, res) => {
   maxSentences = sentences.length;
@@ -156,6 +156,64 @@ app.get('/covid', (req, res) => {
     
   },
     ))
+})
+let final;
+app.post('/getgoogle', async(req, res) => {
+  
+  let uid = req.body.uid;
+  
+  let email = req.body.email
+
+  
+  let validation = await User.findOne({ username: email })
+  let pfp = await User.findOne({ username: email }).select('profilepicture')
+  if(validation){
+    session = req.session
+
+    session.userid = email
+    //console.log(session.userid)
+    final = {
+      username: session.userid,
+      profilepicture: pfp,
+      uid: uid
+    }
+    res.status(200).send({ message: "logged in with google", email: email, loggedIn: true })
+    
+  }
+
+  else {
+    
+    User.create({ username: email ,  profilepicture: req.body.profilepicture, uid: req.body.uid })
+    session = req.session
+
+    session.userid = email
+    //console.log(session.userid)
+    final = session.userid
+     res.status(200).send({ message: "Created an account", uid: req.body.uid })
+  }
+ 
+  
+})
+
+// app.get('/t', async(req, res) => {
+
+//   let ugh = await User.findOne({ username: 'test' }).select('profilepicture')
+
+//   res.send({ message: ugh.profilepicture})
+// })
+
+app.get('/googlepost', (req, res) => {
+  session = req.session
+  //console.log(session)
+  //console.log(session.userid)
+
+  if(final.username) {
+     res.send({ loggedIn: true, username: final.username ,pfp: final.profilepicture, uid: final.uid })
+  }
+  if(final.username === undefined) {
+    res.send({ loggedIn: false })
+  }
+  
 })
 app.listen(port, function () {
   console.log(`Server listening on port 3000, http://localhost:5000 ${process.env.PORT}`);
