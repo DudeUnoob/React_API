@@ -17,11 +17,30 @@ if(testClient === true){
     testClient = `http://localhost:5000`
 }
     const [loginStatus, setLoginStatus] = useState("");
+    const [googleStatus, setGoogleLoginStatus] = useState("");
     const [baseImage, setBaseImage] = useState("");
     const [profilePictureStatus, setUpdatedProfilePicture] = useState("");
     const [profilePicture, setProfilePicture] = useState("");
     
     Axios.defaults.withCredentials = true;
+    useEffect(() => {
+      Axios.get(`${testClient}/googlepost`).then((response) => {
+        console.log(response)
+          //document.getElementById('fileButton').style.visibility = "hidden"
+          //document.getElementById("testingbutton").style.visibility = "hidden";
+          //document.getElementById("choosePfp").style.visibility = "hidden";
+          //document.getElementById("img").style.visibility = "hidden";
+       //  document.getElementById("pfp").style.visibility = "hidden";
+        if(response.data.loggedIn === true){
+          setGoogleLoginStatus(
+            response.data.username
+          )
+          
+        }
+      })
+    },[])
+
+   
     useEffect(() => {
         Axios.get(`${testClient}/login`).then((response) => {
             if (response.data.loggedIn === true) {
@@ -73,6 +92,18 @@ if(testClient === true){
 
     //       })
     //   }
+    // useEffect(() => {
+    //   Axios.get(`${testClient}/googlepost`).then((response) => {
+    //     if(response.data.loggedIn === true){
+    //       setLoginStatus(
+    //         <div>
+    //         <h1>{response.data.username}</h1>
+    //         <img src={response.data['pfp'].profilepicture} />
+    //         </div>
+    //       )
+    //     }
+    //   })
+    // },[])
       let finalImage = profilePicture   
       const submitPfp = () => {
           Axios.post(`${testClient}/profilepicture`, {
@@ -112,7 +143,14 @@ if(testClient === true){
     //     Axios.post('${testClient}/profilepicture')
     // }
    
-  
+    if(googleStatus){
+      return (
+        googleStatus
+      )
+    }
+    if(!googleStatus){
+      return checkLogin()
+    }
        
     function checkLogin() {
         Axios.get(`${testClient}/login`).then((response) => {
@@ -124,7 +162,7 @@ if(testClient === true){
                 
             return (
                 <div className="App">
-                    <h1>Choose a Profile Picture</h1>
+                    <h1 id="choosePfp">Choose a Profile Picture</h1>
                     <input
                     type="file" id="fileButton"
                     onChange={(e) => {
@@ -155,6 +193,7 @@ if(testClient === true){
             let redirect = <a href="/login">Login</a>
             return redirect
         }
+
     }
     let myArray = ['Users', 'Signup', 'Login', "Profile"]
     return (
@@ -169,7 +208,7 @@ if(testClient === true){
             </div>
                 {checkLogin()}
             </div>
-
+            
         </>
     )
 
