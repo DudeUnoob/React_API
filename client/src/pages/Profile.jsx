@@ -4,7 +4,7 @@ import Axios from "axios";
 import ReactDOM from 'react-dom';
 import '../public/Home.css';
 import { testClient } from "./testClient";
-
+let myArray = ['Users', 'Signup', 'Login', "Profile"]
 
 
 function Profile() {
@@ -144,9 +144,7 @@ if(testClient === true){
     // }
    
     if(googleStatus){
-      return (
-        googleStatus
-      )
+      return <a href="/googleprofile">Profile</a>
     }
     if(!googleStatus){
       return checkLogin()
@@ -162,6 +160,13 @@ if(testClient === true){
                 
             return (
                 <div className="App">
+                  <div className="topnav">
+                <a className="active" href="/">Home</a>
+                {myArray.map((elm, i) => (
+                    <a href={elm} key={i}>{elm}</a>
+                ))}
+
+            </div>
                     <h1 id="choosePfp">Choose a Profile Picture</h1>
                     <input
                     type="file" id="fileButton"
@@ -195,7 +200,7 @@ if(testClient === true){
         }
 
     }
-    let myArray = ['Users', 'Signup', 'Login', "Profile"]
+    
     return (
         <>
             <div>
