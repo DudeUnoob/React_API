@@ -109,7 +109,10 @@ useEffect(() => {
       
 
       <div className="login" id="loginCheck">
+      
         <h1>Login</h1>
+        <a href="/google">Sign in with Google</a>
+        <br />
         <input
           type="text"
           placeholder="Username..."

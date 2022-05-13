@@ -1,7 +1,7 @@
 import  GoogleLogin  from 'react-google-login';
 import { getAuth,signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import initializeAuthentication from '../Firebase/firebaseinit';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import '../public/Home.css';
 import {testClient} from './testClient';
@@ -23,6 +23,7 @@ if(testClient === true){
 
 function Google() {
     const [setLoginStatus, loginStatus] = useState("");
+    const [randy, setRand] = useState()
     const [user, setUser] = useState({});
     const handleGoogleSignIn = () => {
         const auth = getAuth();
@@ -45,8 +46,17 @@ function Google() {
             console.log(error.message)
         });
     }
+    let rand;
+    useEffect(() => {
+        Axios.get(`${testClient}/googlepost`).then((response) => {
+            if(response.data.loggedIn === true){
+                // setRand(<p>Hello</p>)
+                // document.getElementById("googleButton").style.visibility = "hidden"
+            }
+        })
+    },[])
     let myArray = ['Users', 'Signup', 'Login', "Profile"]
-
+    
     {/* <GoogleLogin 
             clientId={test} 
             buttonText="Log in with Google" 
@@ -65,7 +75,9 @@ function Google() {
                 ))}
 
             </div>
-                <button onClick={handleGoogleSignIn} style={{ marginLeft: "15px"}}>Google Sign in</button> <br />
+            <a href='/login' style={{marginLeft: "15px"}}>Login with existing account</a>
+            <br />
+                <button onClick={handleGoogleSignIn} style={{ marginLeft: "15px" }} id="googleButton"><i class="fa fa-google fa-fw"></i>Sign in with Google</button> <br />
                 {
                     user.email && (<div>
                         <h2 style={{ marginLeft: "15px"}}>Welcome {user.displayName}</h2>
@@ -73,7 +85,7 @@ function Google() {
                         <img src={user.photoURL} style={{borderRadius: "50%", marginLeft: "15px"}} alt=""/>
                     </div>)
                 }
-               
+               {randy}
             </div>
            
   

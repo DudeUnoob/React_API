@@ -42,7 +42,8 @@ function GoogleProfile () {
             </div>
             <h1>Welcome {loginStatus.username}</h1>
             <p>Hello</p>
-            <img src={loginStatus.pfp} style={{ borderRadius: "50%"}}/>
+            
+            <a href='/'><img src={loginStatus.pfp} style={{ borderRadius: "50%"}}/></a>
             {/* <button onClick={validateLogin}>Click</button> */}
             
         </div>

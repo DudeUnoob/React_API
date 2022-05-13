@@ -211,7 +211,7 @@ app.get('/googlepost', (req, res) => {
   if(final.username) {
      res.send({ loggedIn: true, username: final.username ,pfp: final.profilepicture, uid: final.uid })
   }
-  if(final.username === undefined) {
+  else if(final.username === undefined) {
     res.send({ loggedIn: false })
   }
   

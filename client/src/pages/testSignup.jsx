@@ -75,7 +75,7 @@ class Signup extends React.Component {
                     
                 
             
-            <h1 style={{color: "white"}}>Signup!</h1>
+            <h1 style={{color: "white"}}>Signup</h1>
             <div class="context"></div>
             
             <div>
@@ -91,6 +91,9 @@ class Signup extends React.Component {
                     </div>
                     <button type="submit" onClick={this.validatePassword}>Submit</button>
                 </form>
+            </div>
+            <div>
+                <a href="/google" style={{color: "white"}}>Signup with Google</a>
             </div>
             </div >
             </>
