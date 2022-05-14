@@ -8,7 +8,7 @@ import {testClient} from './testClient';
 let test = '188949576388-vfamlaosjri203jcjo7m0qd8klvkm549.apps.googleusercontent.com'
 
 
-
+Axios.defaults.withCredentials = true;
 initializeAuthentication();
 
 const provider = new GoogleAuthProvider();
@@ -23,6 +23,7 @@ if(testClient === true){
 
 function Google() {
     const [setLoginStatus, loginStatus] = useState("");
+    const [vis, setVisibility] = useState("");
     const [randy, setRand] = useState()
     const [user, setUser] = useState({});
     const handleGoogleSignIn = () => {
@@ -56,6 +57,18 @@ function Google() {
         }).then((response) => console.log(response))
         document.getElementById("successfullLogout").innerHTML = "Successfully Logged out"
     }
+
+    
+    useEffect(() => {
+        Axios.get(`${testClient}/login`).then((response) => {
+            if(response.data.loggedIn === true){
+                setVisibility("hidden")
+            }
+            if(response.data.loggedIn === false){
+                setVisibility("visible")
+            }
+        })
+    },[])
     useEffect(() => {
         Axios.get(`${testClient}/googlepost`).then((response) => {
             if(response.data.loggedIn === true){
@@ -78,6 +91,7 @@ function Google() {
     return (
         
             <div>
+                
                 <div className="topnav">
                 <a className="active" href="/">Home</a>
                 {myArray.map((elm, i) => (
@@ -85,9 +99,9 @@ function Google() {
                 ))}
 
             </div>
-            <a href='/login' style={{marginLeft: "15px"}}>Login with existing account</a>
+            <a href='/login' style={{marginLeft: "15px", visibility: vis }}>Login with existing account</a>
             <br />
-                <button onClick={handleGoogleSignIn} style={{ marginLeft: "15px" }} id="googleButton"><i className="fa fa-google fa-fw"></i>Sign in with Google</button> <br />
+                <button onClick={handleGoogleSignIn} style={{ marginLeft: "15px", visibility: vis }} id="googleButton"><i className="fa fa-google fa-fw"></i>Sign in with Google</button> <br />
                 {
                     user.email && (<div>
                         <h2 style={{ marginLeft: "15px"}}>Welcome {user.displayName}</h2>
@@ -97,7 +111,7 @@ function Google() {
                 }
                {randy}
                <div>
-                   <button style={{marginLeft: "15px"}} type='button' onClick={googleSignOut}>Signout</button>
+                   <button style={{marginLeft: "15px" }} type='button' onClick={googleSignOut} id="signingout">Signout</button>
                    <p style={{marginLeft: "15px"}} id="successfullLogout"></p>
                </div>
             </div>
