@@ -30,6 +30,8 @@ function GoogleProfile () {
             }
         })
     },[])
+
+    
     let myArray = ['Users', 'Signup', 'Login', "Profile"]
     return (
         <div>
@@ -44,6 +46,7 @@ function GoogleProfile () {
             <p>Hello</p>
             
             <a href='/'><img src={loginStatus.pfp} style={{ borderRadius: "50%"}}/></a>
+            
             {/* <button onClick={validateLogin}>Click</button> */}
             
         </div>

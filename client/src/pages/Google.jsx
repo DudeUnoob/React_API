@@ -1,5 +1,5 @@
-import  GoogleLogin  from 'react-google-login';
-import { getAuth,signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import  GoogleLogin, { useGoogleLogout }  from 'react-google-login';
+import { getAuth,signInWithPopup, GoogleAuthProvider, EmailAuthCredential, signOut } from "firebase/auth";
 import initializeAuthentication from '../Firebase/firebaseinit';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
@@ -47,6 +47,15 @@ function Google() {
         });
     }
     let rand;
+    function googleSignOut(){
+        localStorage.clear()
+        Axios.post(`${testClient}/getgoogle`, {
+            email: null,
+            profilepicture: null,
+            uid: null
+        }).then((response) => console.log(response))
+        document.getElementById("successfullLogout").innerHTML = "Successfully Logged out"
+    }
     useEffect(() => {
         Axios.get(`${testClient}/googlepost`).then((response) => {
             if(response.data.loggedIn === true){
@@ -55,6 +64,7 @@ function Google() {
             }
         })
     },[])
+    
     let myArray = ['Users', 'Signup', 'Login', "Profile"]
     
     {/* <GoogleLogin 
@@ -77,7 +87,7 @@ function Google() {
             </div>
             <a href='/login' style={{marginLeft: "15px"}}>Login with existing account</a>
             <br />
-                <button onClick={handleGoogleSignIn} style={{ marginLeft: "15px" }} id="googleButton"><i class="fa fa-google fa-fw"></i>Sign in with Google</button> <br />
+                <button onClick={handleGoogleSignIn} style={{ marginLeft: "15px" }} id="googleButton"><i className="fa fa-google fa-fw"></i>Sign in with Google</button> <br />
                 {
                     user.email && (<div>
                         <h2 style={{ marginLeft: "15px"}}>Welcome {user.displayName}</h2>
@@ -86,6 +96,10 @@ function Google() {
                     </div>)
                 }
                {randy}
+               <div>
+                   <button style={{marginLeft: "15px"}} type='button' onClick={googleSignOut}>Signout</button>
+                   <p style={{marginLeft: "15px"}} id="successfullLogout"></p>
+               </div>
             </div>
            
   

@@ -37,6 +37,7 @@ app.use(sessions({
   saveUninitialized: true
 }));
 let session;
+let ifLoggedIn;
 app.use(bodyParser.json())
 app.use(fileUpload());
 const oneDay = 1000 * 60 * 60 * 24;
@@ -89,7 +90,7 @@ app.post('/login', async (req, res) => {
     session = req.session;
     session.userid = user.username
     console.log(session.userid)
-    
+    //ifLoggedIn = true
     return res.send({ loggedIn: true, user: session.userid })
   }
 })
@@ -97,10 +98,10 @@ app.post('/login', async (req, res) => {
 app.get('/login', async (req, res) => {
   session = req.session;
   if (session.userid) {
-    
+    //ifLoggedIn = true
     res.send({ loggedIn: true, user: session.userid })
   } else {
-    
+    //ifLoggedIn = false
     res.send({ loggedIn: false })
   }
 })
@@ -159,12 +160,13 @@ app.get('/covid', (req, res) => {
 })
 
 let final;
+
 app.post('/getgoogle', async(req, res) => {
   
   let uid = req.body.uid;
   
   let email = req.body.email
-
+  
   
   let validation = await User.findOne({ username: email })
   let pfp = await User.findOne({ username: email }).select('profilepicture')
@@ -176,8 +178,10 @@ app.post('/getgoogle', async(req, res) => {
     final = {
       username: session.userid,
       profilepicture: pfp,
-      uid: uid
+      uid: uid,
+      loggedIn: true
     }
+    //ifLoggedIn = true
     res.status(200).send({ message: "logged in with google", email: email, loggedIn: true })
     
   }
@@ -209,12 +213,19 @@ app.get('/googlepost', (req, res) => {
   //console.log(session.userid)
 
   if(final.username) {
+    //ifLoggedIn = true
      res.send({ loggedIn: true, username: final.username ,pfp: final.profilepicture, uid: final.uid })
   }
   else if(final.username === undefined) {
+    //ifLoggedIn = false
     res.send({ loggedIn: false })
   }
   
+})
+
+app.post('/googlelogout', async(req, res) => {
+  //ifLoggedIn = false
+  res.send({ loggedIn: false })
 })
 
 
