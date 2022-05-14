@@ -20,6 +20,7 @@ export default function Registration() {
   const [password, setPassword] = useState("");
 
   const [loginStatus, setLoginStatus] = useState("");
+  const [googleStatus, setGoogleStatus] = useState("");
   //const [failChecking, setFailCheck] = useState("");
 
   Axios.defaults.withCredentials = true;
@@ -57,7 +58,13 @@ export default function Registration() {
   //   });
   // }, [])
  
-
+  useEffect(() => {
+    Axios.get(`${testClient}/googlepost`).then((response) => {
+      if(response.data.uid){
+        setGoogleStatus(response.data.username)
+      }
+    })
+  })
 useEffect(() => {
     Axios.get(`${testClient}/login`).then((response) => {
       if (response.data.loggedIn === true) {
@@ -66,12 +73,21 @@ useEffect(() => {
     });
   }, []);
   
+  
+
   function checkLogin () {
     Axios.get(`${testClient}/login`).then((response) => {
       if(response === null){
         
       }
     })
+    if(googleStatus){
+      let logout = <a href={`/google`}>Google logout</a>
+      document.getElementById('loginCheck').style.visibility = 'hidden'
+
+      return logout
+    }
+    
     if(loginStatus){
       let logout = <a href={`${testClient}/logout`}>Logout</a>
       document.getElementById('loginCheck').style.visibility = 'hidden'
@@ -82,6 +98,7 @@ useEffect(() => {
       let nothing = <div></div>
       return nothing
     }
+    
   }
 
   // function test () {

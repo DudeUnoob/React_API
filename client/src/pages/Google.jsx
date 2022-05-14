@@ -1,4 +1,4 @@
-import  GoogleLogin, { useGoogleLogout }  from 'react-google-login';
+
 import { getAuth,signInWithPopup, GoogleAuthProvider, EmailAuthCredential, signOut } from "firebase/auth";
 import initializeAuthentication from '../Firebase/firebaseinit';
 import { useState, useEffect } from 'react';
