@@ -228,6 +228,29 @@ app.post('/googlelogout', async(req, res) => {
   res.send({ loggedIn: false })
 })
 
+app.post('/flashcard', async(req, res) => {
+
+  let testUser = await User.findOne({ username: req.body.username }).select("cards")
+  //User.create({ cards: { flashcard: ['hello'], answer:["world"]} })
+  
+  //res.send({ flashcard: req.body.flashcard, answer: req.body.answer, user: req.body.username })
+  //console.log(testUser['cards'].flashcard)
+  let firstArray = testUser['cards'].flashcard
+  firstArray.push(req.body.flashcard)
+  let answerArray = testUser['cards'].answer
+  answerArray.push(req.body.answer)
+
+  await User.findOneAndUpdate({ username: req.body.username }, { cards: { flashcard: firstArray, answer: answerArray }})
+  res.send({ flashcard: req.body.flashcard, answer: req.body.answer, user: req.body.username })
+})
+
+app.get('/testnet', async(req, res) => {
+
+  let final = await User.findOne({ username: "testing" }).select("cards")
+
+  res.send(final)
+})
+
 
 app.listen(process.env.PORT || 5000, function () {
 

@@ -69,14 +69,14 @@ function Google() {
             }
         })
     },[])
-    useEffect(() => {
-        Axios.get(`${testClient}/googlepost`).then((response) => {
-            if(response.data.loggedIn === true){
-                // setRand(<p>Hello</p>)
-                // document.getElementById("googleButton").style.visibility = "hidden"
-            }
-        })
-    },[])
+    // useEffect(() => {
+    //     Axios.get(`${testClient}/googlepost`).then((response) => {
+    //         if(response.data.loggedIn === true){
+    //             // setRand(<p>Hello</p>)
+    //             // document.getElementById("googleButton").style.visibility = "hidden"
+    //         }
+    //     })
+    // },[])
     
     let myArray = ['Users', 'Signup', 'Login', "Profile"]
     
