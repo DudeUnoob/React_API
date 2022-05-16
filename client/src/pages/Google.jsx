@@ -78,7 +78,7 @@ function Google() {
     //     })
     // },[])
     
-    let myArray = ['Users', 'Signup', 'Login', "Profile"]
+    let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards"]
     
     {/* <GoogleLogin 
             clientId={test} 

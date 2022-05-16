@@ -17,7 +17,7 @@ function Home() {
         testClient = `http://localhost:5000`
     }
 
-    let myArray = ['Users', 'Signup', 'Login', "Profile"]
+    let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards"]
     const [backendData, setBackendData] = useState({});
     // useEffect(() => {
     //     fetch('/api').then(res => res.json()).then(data => setBackendData(data))

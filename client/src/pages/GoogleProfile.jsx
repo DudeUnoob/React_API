@@ -32,7 +32,7 @@ function GoogleProfile () {
     },[])
 
     
-    let myArray = ['Users', 'Signup', 'Login', "Profile"]
+    let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards"]
     return (
         <div>
             <div className="topnav">

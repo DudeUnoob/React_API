@@ -244,6 +244,12 @@ app.post('/flashcard', async(req, res) => {
   res.send({ flashcard: req.body.flashcard, answer: req.body.answer, user: req.body.username })
 })
 
+app.post('/getflashcard', async(req, res) => {
+   
+  let ugh = await User.find({ username: req.body.username }).select("cards")
+  res.send(ugh)
+})
+
 app.get('/testnet', async(req, res) => {
 
   let final = await User.findOne({ username: "testing" }).select("cards")
