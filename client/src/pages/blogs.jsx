@@ -97,7 +97,7 @@ function Blogs() {
     //     }
     // })
     const handleSubmit = async(e) =>  {
-        console.log(e)
+      //  console.log(e)
     }
 
     let listItems = overall.map((city, i) => {
@@ -107,19 +107,31 @@ function Blogs() {
           <div className="container" >
             <p key={i} ><b>{city.title}</b></p>
             <p>{city.description}</p>
+            <button type='button' onClick={() => edit(city.title, i)}  >
+            Edit
+            </button>
+            <form id={i} style={{visibility: "visible"}}>
+            {/* <input type={"text"}   placeholder="Title Edit"></input>
+            <textarea type={"text"}  placeholder="Description Edit" ></textarea> */}
+            </form>
           </div>
         </div>
         )
         
     })
     
+    function edit (title, i) {
+        
+        console.log(i)
+        document.getElementById(i).innerHTML = '<input type={"text"}   placeholder="Title Edit"></input><textarea type={"text"}  placeholder="Description Edit" style="width:500px; height:200px"></textarea>'
+        
+        
+        
+        
+        console.log()
+        
+    }
 
-    
-    
-    
-
-    
-    
     //console.log(titler)
     
 
@@ -148,42 +160,15 @@ function Blogs() {
                     
                 <h1>Blogs</h1>
                 {listItems}
-                    {/* <div style={{  overflowX: "auto" }}>
-            <table style={{ marginLeft: "15px" }} id="table">
-
-                <tbody>
-
-
-                    <tr style={{padding: "10px"}}>
-                        <th style={{padding: "10px" }}>Flashcards</th>
-                        
-                    </tr>
-                    <tr style={{padding: "10px" }}>
-                        <th style={{padding: "10px"}}>Answers</th>
-                        
-                        
-                    </tr>
                     
 
-                </tbody>
-            </table>
-            </div> */}
-
                 </div>
 
 
-                <div className="blog-options">
-                    <button className="btn dark publish-btn">publish</button>
-                    <input type="file" accept="image/*" id="image-upload" hidden />
-
-                </div>
+                
 
 
-                <div className="blog">
-
-
-                </div>
-
+                
             </div>
 
 
