@@ -107,17 +107,31 @@ function Flashcards() {
         
         
     }
+
+    
+        
+    
+    
     let arrayFlashcards = flashcard
     let arrayAnswers = answer
-    //console.log(arrayFlashcards)
+    console.log(arrayFlashcards)
     let listItems = arrayFlashcards.map((city, i) => <td style={{padding: "10px"}} id="flashy"  key={i}>{city}</td>)
-    let answeredItems = arrayAnswers.map((ans, i) => <td style={{padding: "10px"}}  id="ansy" key={i}>{ans}</td>)
+    let answeredItems = arrayAnswers.map((ans, i) => <td   style={{padding: "10px"}}  id="ansy" key={i}>{ans}</td>)
+
+    
     //console.log(listItems)
     //console.log(answeredItems)
-   
+    function ugh () {
+        let ah = document.getElementById("searchTxt").value;
+
+        Axios.post(`${testClient}/deleteflashcard`,{
+            username: username,
+            flashcard: ah
+        }).then((response) => console.log(response))
+    }
     return (
         
-        <div id="App">
+        <div id="Flasher">
             <div className="topnav">
                 <a className="active" href="/">Home</a>
                 {myArray.map((elm,i) => (
@@ -135,17 +149,19 @@ function Flashcards() {
             <p id="validation" style={{ visibility: "hidden", marginLeft: "15px" }}>Write something</p>
             <p style={{ visibility: "hidden", marginLeft: "15px" }} id="completed">Saved</p>
             <a href="/login" style={{ visibility: "hidden", marginLeft: "15px" }} id="checkLogin">Login to make Flashcards</a>
+            <input name="searchTxt" type="text"  id="searchTxt" class="searchField"/>
+            <button type={"submit"}  onClick={ugh} id="deleteFlashcard">Save</button>
 
             {/* <button onClick={testFlashcard}>Show Flashcards</button> */}
 
-
-            <table style={{ marginLeft: "15px"}} id="table">
+            <div style={{  overflowX: "auto" }}>
+            <table style={{ marginLeft: "15px" }} id="table">
 
                 <tbody>
 
 
                     <tr style={{padding: "10px"}}>
-                        <th style={{padding: "10px"}}>Flashcards</th>
+                        <th style={{padding: "10px" }}>Flashcards</th>
                         {listItems}
                     </tr>
                     <tr style={{padding: "10px" }}>
@@ -157,7 +173,9 @@ function Flashcards() {
 
                 </tbody>
             </table>
+            </div>
         </div>
+       
     )
 
 

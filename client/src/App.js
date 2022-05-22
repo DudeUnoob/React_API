@@ -12,6 +12,7 @@ import Covid from './pages/Covid';
 import Google from './pages/Google';
 import GoogleProfile from './pages/GoogleProfile';
 import Flashcards from './pages/Flashcards';
+import Blogs from './pages/blogs';
 
 function App() {
   return (
@@ -46,6 +47,9 @@ function App() {
 
       </Route>
       <Route path='/flashcards' element={<Flashcards />}>
+
+      </Route>
+      <Route path='/blogs' element={<Blogs />}>
 
       </Route>
       

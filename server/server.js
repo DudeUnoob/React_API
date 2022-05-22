@@ -257,7 +257,30 @@ app.get('/testnet', async(req, res) => {
   res.send(final)
 })
 
+app.post('/deleteflashcard', async(req, res) => {
 
+  let ok = await User.findOne({  username: req.body.username })
+  console.log(ok)
+  res.send({ user: req.body.username, flashcard: req.body.flashcard })
+})
+app.post('/blog', async(req, res) => {
+  // let testUser = await User.findOne({ username: req.body.username }).select("blog")
+  // let firstArray = testUser['blog'].title
+  // firstArray.push(req.body.title)
+  // let answerArray = testUser['blog'].description
+  // answerArray.push(req.body.description)
+  await User.create({ username: req.body.username,  blog: { title: req.body.title, description: req.body.description } })
+  res.send({description: req.body.description, title: req.body.title})
+})
+
+app.post('/getblog', async(req, res) => {
+
+  //let title =  await User.find({ username: req.body.username }).distinct('title')
+  //let description = await User.find({ username: req.body.username }).distinct('description')
+  //console.log(blogs)
+  let blog =  await User.find({ username: req.body.username }).distinct('blog')
+  res.send(blog)
+})
 app.listen(process.env.PORT || 5000, function () {
 
   console.log(`Server listening on port 3000, http://localhost:5000 ${process.env.PORT}`);

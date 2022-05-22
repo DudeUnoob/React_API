@@ -12,7 +12,13 @@ let Schema = new mongoose.Schema({
     cards: {
         flashcard: Array,
         answer: Array
+    },
+    blog:{
+        title: String,
+        description: String
     }
+    
+    
 })
 
 module.exports = mongoose.model('User', Schema)
