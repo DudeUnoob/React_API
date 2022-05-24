@@ -16,7 +16,8 @@ let Schema = new mongoose.Schema({
     blog:{
         title: String,
         description: String
-    }
+    }, 
+    
     
     
 })

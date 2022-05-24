@@ -45,8 +45,9 @@ function Blogs() {
             title: title
         }).then((response) => {
             console.log(response.data[0].title)
-
+           
         })
+        
     }
 
     //console.log([titler])
@@ -64,6 +65,7 @@ function Blogs() {
             setDescrip(response.data)
             console.log(response.data)
         })
+        
     }, [count])
     let obj = {
         "title": [
@@ -107,31 +109,80 @@ function Blogs() {
           <div className="container" >
             <p key={i} ><b>{city.title}</b></p>
             <p>{city.description}</p>
-            <button type='button' onClick={() => edit(city.title, i)}  >
+            <button type='button' style={{backgroundColor: "#b4b4b4",
+  border: "none",
+  color: "white",
+  marginLeft:"5px",
+  padding: "10px 10px",
+  textAlign: "center",
+  borderRadius:"10px",
+  textDecoration: "none",
+  display: "inline-block",
+  fontSize: "15px"}} onClick={() => edit(city.title, i)}  >
             Edit
             </button>
-            <form id={i} style={{visibility: "visible"}}>
-            {/* <input type={"text"}   placeholder="Title Edit"></input>
-            <textarea type={"text"}  placeholder="Description Edit" ></textarea> */}
+            <form id={i} style={{visibility: "hidden"}}>
+            <input type={"text"} name="titleEdit"  placeholder="Title Edit"></input>
+            <input type={"text"} name="descriptionEdit" placeholder="Description Edit" ></input>
+            <button type='button'   style={{ backgroundColor: "#3cb371",
+  border: "none",
+  color: "white",
+  marginLeft:"5px",
+  padding: "10px 10px",
+  textAlign: "center",
+  borderRadius:"10px",
+  textDecoration: "none",
+  display: "inline-block",
+  fontSize: "15px"}}      onClick={() => testButton(city.title, i)}>Save</button>
+            
             </form>
           </div>
         </div>
         )
         
     })
-    
-    function edit (title, i) {
-        
-        console.log(i)
-        document.getElementById(i).innerHTML = '<input type={"text"}   placeholder="Title Edit"></input><textarea type={"text"}  placeholder="Description Edit" style="width:500px; height:200px"></textarea>'
-        
-        
-        
-        
-        console.log()
+
+    function testButton (title, i){
+        let titleEdit = document.querySelector("input[name='titleEdit']").value
+        let descriptionEdit = document.querySelector("input[name='descriptionEdit']").value;
+        if(descriptionEdit === ""){
+            Axios.post(`${testClient}/editblog`, {
+                title: titleEdit,
+                ogtitle: title,
+                username: username
+            }).then((response) => console.log(response))
+            window.location.reload()
+            console.log('sent only the title edit')
+        }
+        if(titleEdit === ""){
+            Axios.post(`${testClient}/editblog`, {
+                description: descriptionEdit,
+                ogtitle: title, 
+                username: username
+            }).then((response) => console.log(response))
+            window.location.reload()
+            console.log('sent only the description edit')
+        }
+        if(titleEdit !== "" && descriptionEdit !== "") {
+            Axios.post(`${testClient}/editblog`, {
+                description: descriptionEdit,
+                title: titleEdit,
+                ogtitle: title, 
+                username: username
+            }).then((response) => console.log(response))
+            window.location.reload()
+            console.log('sent both edits!')
+        }
+        // console.log(titleEdit)
+        // console.log(descriptionEdit)
         
     }
-
+    
+    function edit (title, i) {
+       document.getElementById(i).style.visibility = "visible";
+        
+    }
+    
     //console.log(titler)
     
 

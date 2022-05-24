@@ -281,6 +281,32 @@ app.post('/getblog', async(req, res) => {
   let blog =  await User.find({ username: req.body.username }).distinct('blog')
   res.send(blog)
 })
+
+app.post('/editblog', async(req, res) => {
+  console.log(req.body.description)
+  console.log(req.body.title)
+  console.log(req.body.ogtitle)
+  console.log(req.body.username)
+
+  // if(req.body.description !== undefined &&  req.body.title !== undefined){
+  //   await User.findOneAndUpdate({ blog: { title: req.body.ogtitle }, username: req.body.username  }, { blog: { title: req.body.title, description: req.body.description }})
+  //   res.send("updated description and title")
+  // }
+  // if(req.body.description === undefined){
+  //   await User.findOneAndUpdate({ blog: { title: req.body.ogtitle }, username: req.body.username }, { blog: { title: req.body.title }})
+  //   res.send("updated title")
+  // }
+  // if(req.body.title === undefined){
+  //   await User.findOneAndUpdate({ blog: { title: req.body.ogtitle }, username: req.body.username }, { blog: { description: req.body.description }})
+
+  //   res.send("updated description")
+  // }
+  let filter;
+  await User.findOneAndUpdate({ username: req.body.username,  'blog.title': req.body.ogtitle }, { 'blog.title': req.body.title, 'blog.description': req.body.description})
+  .then((data) => console.log(data))
+  
+  res.send("Yo")
+})
 app.listen(process.env.PORT || 5000, function () {
 
   console.log(`Server listening on port 3000, http://localhost:5000 ${process.env.PORT}`);
