@@ -307,6 +307,15 @@ app.post('/editblog', async(req, res) => {
   
   res.send("Yo")
 })
+
+app.post('/deleteblog', async(req, res) => {
+  let user = req.body.username
+  let titler = req.body.title
+
+  await User.findOneAndRemove({ username: user, 'blog.title': titler })
+
+  res.send({ message: "Deleted Blog!" })
+})
 app.listen(process.env.PORT || 5000, function () {
 
   console.log(`Server listening on port 3000, http://localhost:5000 ${process.env.PORT}`);

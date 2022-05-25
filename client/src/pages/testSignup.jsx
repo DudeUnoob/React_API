@@ -58,7 +58,7 @@ class Signup extends React.Component {
         }
     render(){
         const { username, password } = this.state;
-        let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards"]
+        let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards", "Blogs"]
         return(
             <>
             

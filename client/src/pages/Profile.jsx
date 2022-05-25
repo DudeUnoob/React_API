@@ -4,7 +4,7 @@ import Axios from "axios";
 import ReactDOM from 'react-dom';
 import '../public/Home.css';
 import { testClient } from "./testClient";
-let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards"]
+let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards", "Blogs"]
 
 
 function Profile() {

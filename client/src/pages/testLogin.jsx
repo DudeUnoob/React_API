@@ -111,7 +111,7 @@ useEffect(() => {
   // }
 
   
-  let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards"]
+  let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards", "Blogs"]
     
   return (
     <>

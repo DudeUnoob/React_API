@@ -7,7 +7,7 @@ function Users() {
     useEffect(() => {
         fetch('/user').then(res => res.json()).then(data => setBackendData(data))
     }, [])
-    let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards"]
+    let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards", "Blogs"]
     let users = backendData.map((element, i) => <li key={i}>{element}</li>)
     return(
         

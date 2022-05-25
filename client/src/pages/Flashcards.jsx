@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Axios from "axios";
 import { testClient } from "./testClient";
 import '../public/Home.css';
-let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards"]
+let myArray = ['Users', 'Signup', 'Login', "Profile", "Flashcards", "Blogs"]
 
 if (testClient === false) {
     testClient = `https://reactroastapi.up.railway.app`

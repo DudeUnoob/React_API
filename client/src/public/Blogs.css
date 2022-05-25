@@ -89,7 +89,15 @@ textarea::-webkit-scrollbar-thumb{
     background: rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
-
+body{
+    background-color: #e7e7e7;
+}
+textarea#title{
+    max-width: 75%;
+}
+textarea#blogText{
+    max-width: 75%;
+}
 .title,
 .article{
     width: 100%;
