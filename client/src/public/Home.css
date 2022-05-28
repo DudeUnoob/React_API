@@ -432,3 +432,27 @@ button#submitButton:active {
   * {
     box-sizing: border-box;
   }
+
+  #searchBar {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+  }
+  
+  /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+  @media screen and (max-width: 600px) {
+    #searchBar {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+    #searchBar{
+      border: 1px solid #ccc;
+    }
+  }

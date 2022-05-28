@@ -13,6 +13,8 @@ import Google from './pages/Google';
 import GoogleProfile from './pages/GoogleProfile';
 import Flashcards from './pages/Flashcards';
 import Blogs from './pages/blogs';
+import UsersBlogs from './pages/UsersBlogs';
+import BlogRender from './pages/BlogRender';
 
 function App() {
   return (
@@ -52,6 +54,14 @@ function App() {
       <Route path='/blogs' element={<Blogs />}>
 
       </Route>
+
+      <Route path='/users/:user' element={<UsersBlogs />}>
+
+      </Route>
+      <Route path='/users/:user/:title' element={<BlogRender />}>
+
+      </Route>
+      
       
     </Routes>
   </BrowserRouter>

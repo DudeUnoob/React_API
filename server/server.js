@@ -316,6 +316,37 @@ app.post('/deleteblog', async(req, res) => {
 
   res.send({ message: "Deleted Blog!" })
 })
+app.get('/rand', async(req, res) => {
+  User.count().exec(function (err, count) {
+
+    // Get a random entry
+    var random = Math.floor(Math.random() * count)
+  
+    // Again query all users but only fetch one offset by our random #
+    User.findOne({}).skip(random).exec(
+      function (err, result) {
+        // Tada! random user
+        console.log(result.blog.title)
+        res.send({ title: result.blog.title, description: result.blog.description })
+      })
+  })
+  
+} )
+
+app.post('/usersblog', async(req, res) => {
+  let here = await User.find({ username: req.body.username }).distinct('blog')
+  console.log(req.body.username)
+  console.log(here)
+  res.send(here)
+})
+
+app.post('/userblogdescription', async(req, res) => {
+  let user = req.body.username;
+  let title = req.body.title;
+
+  let here = await User.findOne({ username: user, 'blog.title': title }).distinct('blog.description')
+  res.send(here)
+})
 app.listen(process.env.PORT || 5000, function () {
 
   console.log(`Server listening on port 3000, http://localhost:5000 ${process.env.PORT}`);

@@ -44,8 +44,8 @@ function Blogs() {
             description: text,
             title: title
         }).then((response) => {
-            console.log(response.data[0].title)
-
+            console.log(response.data)
+            window.location.reload()
         })
 
     }
@@ -136,7 +136,7 @@ function Blogs() {
                         display: "inline-block",
                         marginTop: "12px",
                         fontSize: "15px"
-                    }}type='button' name="confirmDelete"  onClick={() => confirmDelete(city.title, i)}>Delete</button>
+                    }} type='button' name="confirmDelete" onClick={() => confirmDelete(city.title, i)}>Delete</button>
                     <form id={i} style={{ visibility: "hidden" }}>
                         <input type={"text"} name="titleEdit" placeholder="Title Edit"></input>
                         <input type={"text"} name="descriptionEdit" placeholder="Description Edit" ></input>
@@ -161,8 +161,8 @@ function Blogs() {
     })
     const confirmDelete = (title, i) => {
         let text;
-       
-        if(window.confirm("Are you sure you want to delete this blog?")){
+
+        if (window.confirm("Are you sure you want to delete this blog?")) {
             console.log("Deleted")
             console.log(title)
             Axios.post(`${testClient}/deleteblog`, {
@@ -229,7 +229,7 @@ function Blogs() {
 
     return (
         <>
-            
+
             {/* <nav className="navbar">
 
 
@@ -238,22 +238,36 @@ function Blogs() {
             <div className='banner' id="banner">
 
 
-            <div className="blog">
-                <h1>Hey {username}!</h1>
-                <textarea type="text" className="title" id="title" placeholder="Blog title..." maxLength={"60"}></textarea>
-                <textarea type="text" className="article" id="blogText" placeholder="Start writing here..." maxLength={"20000"}></textarea>
+                <div className="blog">
+                    <h1>Hey {username}!</h1>
+                    <textarea type="text" className="title" id="title" placeholder="Blog title..." maxLength={"60"}></textarea>
+                    <textarea type="text" className="article" id="blogText" placeholder="Start writing here..." maxLength={"20000"}></textarea>
+                    <div>
+                        <button type='submit' onClick={() => text()} style={{
+                            backgroundColor: "#588163",
+                            border: "none",
+                            color: "white",
+                            marginLeft: "5px",
+                            padding: "10px 10px",
+                            textAlign: "center",
+                            borderRadius: "10px",
+                            textDecoration: "none",
+                            display: "inline-block",
+                            marginTop: "12px",
+                            flex: "5px",
+                            fontSize: "15px"
+                        }}>Save</button>
+                    </div>
+                    <h1>Blogs</h1>
+                    {listItems}
 
 
-                <h1>Blogs</h1>
-                {listItems}
 
 
 
 
 
-
-
-            </div>
+                </div>
 
             </div>
 
