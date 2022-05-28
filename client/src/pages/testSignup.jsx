@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../public/Home.css';
 import { testClient } from "./testClient";
-
+import Axios from 'axios';
+Axios.defaults.withCredentials = true;
 
 const config = {
     headers:{
@@ -21,6 +22,7 @@ if(testClient === true){
     testClient = `http://localhost:5000`
 }
 class Signup extends React.Component {
+    
     constructor(props){
         super(props)
 

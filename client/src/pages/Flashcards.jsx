@@ -20,7 +20,7 @@ function Flashcards() {
     const [answer, setAnswer] = useState([]);
     const [username, setUsername] = useState("");
     useEffect(() => {
-        Axios.get(`${testClient}/login`).then((response) => {
+        Axios.get(`${testClient}/googlepost`).then((response) => {
             if (response.data.loggedIn === false) {
                 console.log(response)
                 document.getElementById("submitButton").style.visibility = "hidden";
@@ -34,10 +34,33 @@ function Flashcards() {
                 let final = response.data.user
                 setUsername(final)
 
+            } else {
+                Axios.get(`${testClient}/login`).then((response) => {
+                    if (response.data.loggedIn === false) {
+                        console.log(response)
+                        document.getElementById("submitButton").style.visibility = "hidden";
+                        document.getElementById("checkLogin").style.visibility = "visible";
+                        document.getElementById("flashcard").style.visibility = "hidden";
+                        document.getElementById("answer").style.visibility = "hidden";
+                        document.getElementById("table").style.visibility = "hidden";
+                        
+        
+                    } else if (response.data.loggedIn === true) {
+                        let final = response.data.user
+                        setUsername(final)
+        
+                    }
+                })
             }
+            
         })
-    }, [])
 
+    })
+    useEffect(() => {
+        
+        
+    }, [])
+    
     useEffect(() => {
         Axios.post(`${testClient}/getflashcard`, {
             username: username,

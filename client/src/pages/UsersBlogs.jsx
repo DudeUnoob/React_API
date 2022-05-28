@@ -4,6 +4,7 @@ import Axios from 'axios';
 import { testClient } from './testClient';
 
 function UsersBlogs() {
+    Axios.defaults.withCredentials = true;
     const [blogData, setBlogData] = useState([]);
     if (testClient === false) {
         testClient = `https://reactroastapi.up.railway.app`
@@ -24,9 +25,9 @@ function UsersBlogs() {
     
     let listOfBlogs = blogData.map((elm, i) => {
         return (
-        <div class="card" style={{width: "50%", marginLeft: "15px", hover:"green"}} onClick={() => window.open(`/users/${user}/${elm.title}`, "_self")}>
-        <div class="container">
-            <h4><b>{elm.title}</b></h4>
+        <div className="card" style={{width: "50%", marginLeft: "15px", hover:"green"}} onClick={() => window.open(`/users/${user}/${elm.title}`, "_self")} key={i}>
+        <div className="container">
+            <h4><b>{elm.title}</b></h4><i>Created: {elm.time}</i>
             
         </div>
     </div>

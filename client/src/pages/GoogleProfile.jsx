@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { testClient } from './testClient';
 import '../public/Home.css';
-
+Axios.defaults.withCredentials = true;
 function GoogleProfile () {
 
     const [loginStatus, setLoginStatus] = useState("")

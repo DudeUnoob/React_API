@@ -24,16 +24,28 @@ function Blogs() {
     const [iValue, setiValue] = useState([]);
     Axios.defaults.withCredentials = true;
     useEffect(() => {
-        Axios.get(`${testClient}/login`).then((response) => {
-            if (response.data.loggedIn === false) {
+        Axios.get(`${testClient}/googlepost`).then((response) => {
+            if(response.data.loggedIn === false ){
                 document.getElementById("banner").innerHTML = '<a href="/login">Login to access blogs!</a>'
-
-            } else {
-                setUsername(response.data.user)
+            } else if(response.data.loggedIn === true){
+                setUsername(response.data.username)
                 console.log(response)
                 setCount("one")
+            } 
+            else{
+                Axios.get(`${testClient}/login`).then((response) => {
+                    if (response.data.loggedIn === false) {
+                        document.getElementById("banner").innerHTML = '<a href="/login">Login to access blogs!</a>'
+        
+                    } else {
+                        setUsername(response.data.user)
+                        console.log(response)
+                        setCount("one")
+                    }
+                })
             }
         })
+        
 
     }, [])
     function text() {
@@ -107,7 +119,7 @@ function Blogs() {
             <div className="card" key={i} style={{ margin: "15px", maxWidth: "75%", borderRadius: "15px" }} onClick={() => handleSubmit(city.title)} >
 
                 <div className="container" >
-                    <p key={i} ><b>{city.title}</b></p>
+                    <p key={i} ><b>{city.title}</b> <i>Created: {city.time}</i></p>
                     <p>{city.description}</p>
                     <button type='button' style={{
                         backgroundColor: "#588163",

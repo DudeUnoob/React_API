@@ -12,6 +12,7 @@ if (testClient === true) {
 }
 
 function BlogRender() {
+    Axios.defaults.withCredentials = true;
     const [blogData, setBlogData] = useState([]);
     const { title } = useParams()
     const { user } = useParams()
@@ -27,9 +28,9 @@ function BlogRender() {
         }
         )
     }, [])
-    let final = blogData.map((elm) => {
-       return ( <div class="card" style={{width: "50%"}}>
-        <div class="container">
+    let final = blogData.map((elm, i) => {
+       return ( <div className="card" style={{width: "50%"}} key={i}>
+        <div className="container">
             <h4><b>{elm}</b></h4>
             
         </div>

@@ -269,7 +269,14 @@ app.post('/blog', async(req, res) => {
   // firstArray.push(req.body.title)
   // let answerArray = testUser['blog'].description
   // answerArray.push(req.body.description)
-  await User.create({ username: req.body.username,  blog: { title: req.body.title, description: req.body.description } })
+ 
+  const d = new Date();
+let month = d.getMonth() + 1
+let day = d.getDate()
+  let year = d.getFullYear()
+  console.log(month + "/" + day + "/" + year)
+  let finalDate = month + "/" + day + "/" + year
+  await User.create({ username: req.body.username,  blog: { title: req.body.title, description: req.body.description, time: finalDate } })
   res.send({description: req.body.description, title: req.body.title})
 })
 
@@ -316,22 +323,7 @@ app.post('/deleteblog', async(req, res) => {
 
   res.send({ message: "Deleted Blog!" })
 })
-app.get('/rand', async(req, res) => {
-  User.count().exec(function (err, count) {
 
-    // Get a random entry
-    var random = Math.floor(Math.random() * count)
-  
-    // Again query all users but only fetch one offset by our random #
-    User.findOne({}).skip(random).exec(
-      function (err, result) {
-        // Tada! random user
-        console.log(result.blog.title)
-        res.send({ title: result.blog.title, description: result.blog.description })
-      })
-  })
-  
-} )
 
 app.post('/usersblog', async(req, res) => {
   let here = await User.find({ username: req.body.username }).distinct('blog')

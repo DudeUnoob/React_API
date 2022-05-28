@@ -1,8 +1,10 @@
 import React from "react";
 import { useEffect, useState } from 'react';
+import Axios from 'axios';
 
 
 function Users() {
+    Axios.defaults.withCredentials = true;
     const[backendData, setBackendData] = useState([]);
     useEffect(() => {
         fetch('/user').then(res => res.json()).then(data => setBackendData(data))
