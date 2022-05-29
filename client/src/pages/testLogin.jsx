@@ -85,7 +85,7 @@ useEffect(() => {
       let logout = <a href={`/google`}>Google logout</a>
       document.getElementById('loginCheck').style.visibility = 'hidden'
 
-      return logout
+      return window.location.href = '/google'
     }
     
     if(loginStatus){

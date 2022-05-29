@@ -23,30 +23,18 @@ function Blogs() {
     const [arrayIndex, setArrayIndex] = useState([]);
     const [iValue, setiValue] = useState([]);
     Axios.defaults.withCredentials = true;
+    
     useEffect(() => {
-        Axios.get(`${testClient}/googlepost`).then((response) => {
-            if(response.data.loggedIn === false ){
+        Axios.get(`${testClient}/login`).then((response) => {
+            if(response.data.loggedIn === false){
                 document.getElementById("banner").innerHTML = '<a href="/login">Login to access blogs!</a>'
-            } else if(response.data.loggedIn === true){
-                setUsername(response.data.username)
-                console.log(response)
-                setCount("one")
-            } 
-            else{
-                Axios.get(`${testClient}/login`).then((response) => {
-                    if (response.data.loggedIn === false) {
-                        document.getElementById("banner").innerHTML = '<a href="/login">Login to access blogs!</a>'
-        
-                    } else {
-                        setUsername(response.data.user)
+                
+            } else {
+                setUsername(response.data.user)
                         console.log(response)
                         setCount("one")
-                    }
-                })
             }
         })
-        
-
     }, [])
     function text() {
         let text = document.getElementById("blogText").value;

@@ -144,7 +144,7 @@ if(testClient === true){
     // }
    
     if(googleStatus){
-      return <a href="/googleprofile">Profile</a>
+      return window.location.href = '/googleprofile'
     }
     if(!googleStatus){
       return checkLogin()
