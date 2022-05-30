@@ -137,7 +137,7 @@ function Blogs() {
                         marginTop: "12px",
                         fontSize: "15px"
                     }} type='button' name="confirmDelete" onClick={() => confirmDelete(city.title, i)}>Delete</button>
-                    <form id={i} style={{ visibility: "hidden" }}>
+                    <form id={i} style={{ display: "none" }}>
                         <input type={"text"} name="titleEdit" placeholder="Title Edit"></input>
                         <input type={"text"} name="descriptionEdit" placeholder="Description Edit" ></input>
                         <button type='button' style={{
@@ -152,6 +152,19 @@ function Blogs() {
                             display: "inline-block",
                             fontSize: "15px"
                         }} onClick={() => testButton(city.title, i)}>Save</button>
+                    <button type='button'style={{
+                        backgroundColor: "#c53a48",
+                        border: "none",
+                        color: "white",
+                        marginLeft: "5px",
+                        padding: "10px 10px",
+                        textAlign: "center",
+                        borderRadius: "10px",
+                        textDecoration: "none",
+                        display: "inline-block",
+                        marginTop: "12px",
+                        fontSize: "15px"
+                    }} onClick={() => document.getElementById(i).style.display = "none"}>Cancel</button>
 
                     </form>
                 </div>
@@ -210,11 +223,11 @@ function Blogs() {
         }
         // console.log(titleEdit)
         // console.log(descriptionEdit)
-
+        window.location.reload()
     }
 
     function edit(title, i) {
-        document.getElementById(i).style.visibility = "visible";
+        document.getElementById(i).style.display = "";
 
     }
 

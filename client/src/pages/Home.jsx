@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import '../public/Home.css';
 import Axios from 'axios';
@@ -88,17 +87,14 @@ function Home() {
   {oof}
 </ul>
 
-      <div className="context">
-        <h1 style={{ marginLeft: 15 }}>Welcome to the Home Page!</h1>
-        {/* <p> {backendData.message}</p> */}
-        <p ><i>Refresh for a random message</i></p>
-        <p><b>Hey, {loginStatus}!</b></p>
-      </div>
-
-
-
-
-      <div className="area" ></div>
+<div className="cater3-movingBG" style={{display:"flex", height:"827px"}}>
+<div className="flyinTxtCont">
+<div className="flyIn lineOne">Perfect</div>
+<div className="flyIn lineTwo">Food</div>
+<div className="flyIn lineThree">Blog</div>
+  <div className="flyIn lineFour">Hey, {loginStatus}!</div>
+</div>
+</div>
     </>
 
 

@@ -331,7 +331,6 @@ app.post('/document', async(req, res) => {
 })
 
 app.post('/getdocument', async(req, res) => {
-  console.log(req.body.username)
   let ah = await User.findOne({ username: req.body.username }, 'Document').exec()
   res.send(ah)
 })

@@ -12,6 +12,7 @@ if (testClient === false) {
 if (testClient === true) {
   testClient = `http://localhost:5000`
 }
+Axios.defaults.withCredentials = true;
 function Docs(){
   const [username, setUsername] = useState("");
   const { quill, quillRef } = useQuill();
