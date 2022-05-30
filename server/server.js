@@ -324,7 +324,17 @@ app.post('/deleteblog', async(req, res) => {
   res.send({ message: "Deleted Blog!" })
 })
 
+app.post('/document', async(req, res) => {
+  console.log(req.body.username)
+  await User.findOneAndUpdate({ username: req.body.username }, { Document: req.body.document })
+  res.send(req.body.document)
+})
 
+app.post('/getdocument', async(req, res) => {
+  console.log(req.body.username)
+  let ah = await User.findOne({ username: req.body.username }, 'Document').exec()
+  res.send(ah)
+})
 app.post('/usersblog', async(req, res) => {
   let here = await User.find({ username: req.body.username }).distinct('blog')
   console.log(req.body.username)

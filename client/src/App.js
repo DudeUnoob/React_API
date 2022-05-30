@@ -15,6 +15,7 @@ import Flashcards from './pages/Flashcards';
 import Blogs from './pages/blogs';
 import UsersBlogs from './pages/UsersBlogs';
 import BlogRender from './pages/BlogRender';
+import Docs from './pages/Docs';
 
 function App() {
   return (
@@ -59,6 +60,9 @@ function App() {
 
       </Route>
       <Route path='/users/:user/:title' element={<BlogRender />}>
+
+      </Route>
+      <Route path='/docs' element={<Docs />}>
 
       </Route>
       

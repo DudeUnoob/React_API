@@ -18,6 +18,7 @@ let Schema = new mongoose.Schema({
         description: String,
         time: String
     }, 
+    Document: Object
     
     
     
