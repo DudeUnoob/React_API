@@ -13,9 +13,11 @@
     "quill": "^1.3.7",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-quilljs --legacy-peer-deps": "^1.2.17",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^2.1.3"
+  },
+  "peerDependencies": {
+    "react-quilljs": "^1.2.17"
   },
   "scripts": {
     "start": "react-scripts start",
