@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useQuill } from 'react-quilljs';
 import { testClient } from './testClient';
@@ -16,7 +15,6 @@ Axios.defaults.withCredentials = true;
 function Docs(){
   const [username, setUsername] = useState("");
   const { quill, quillRef } = useQuill();
-  const { quilly, qref } = useQuill()
   const [documentData, setDocumentData] = useState({});
   const [count, setCount] = useState("")
   useEffect(() => {
