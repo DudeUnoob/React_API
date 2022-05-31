@@ -87,7 +87,7 @@ function Home() {
   {oof}
 </ul>
 
-<div className="cater3-movingBG" style={{display:"flex", height:"827px"}}>
+<div className="cater3-movingBG" style={{display:"flex", height:"956px"}}>
 <div className="flyinTxtCont">
 <div className="flyIn lineOne">Perfect</div>
 <div className="flyIn lineTwo">Food</div>
